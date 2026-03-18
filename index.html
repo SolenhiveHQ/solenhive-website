@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Solenhive — Strategy Built to Scale</title>
+  <meta name="description" content="Solenhive is a Florida-based marketing strategy and digital ventures firm building systems and products that perform." />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:       #0d1b2e;
+      --navy-mid:   #132238;
+      --navy-light: #1e3a5f;
+      --gold:       #e8c44a;
+      --white:      #ffffff;
+      --text-muted: #8fa3bb;
+      --text-dim:   #5a6a7e;
+      --font: 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', Calibri, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      font-weight: 300;
+      background: var(--navy);
+      color: var(--white);
+      line-height: 1.6;
+    }
+
+    /* ── Utility ── */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 60px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 3.5px;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .section-rule {
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+      margin: 24px 0 40px;
+    }
+
+    section {
+      padding: 120px 0;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      background: rgba(13, 27, 46, 0.82);
+      border-bottom: 1px solid var(--navy-light);
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 60px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+    }
+
+    .nav-logo img {
+      display: block;
+      height: 38px;
+      width: auto;
+    }
+
+    /* Inverted logo for nav (dark bg) */
+    .nav-logo img {
+      filter: invert(1) sepia(1) saturate(2) hue-rotate(5deg) brightness(1.1);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--white); }
+
+    .nav-cta {
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--navy);
+      background: var(--gold);
+      padding: 10px 22px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+      white-space: nowrap;
+    }
+
+    .nav-cta:hover { opacity: 0.85; }
+
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--white);
+    }
+
+    /* Mobile nav menu */
+    .nav-mobile {
+      display: none;
+      flex-direction: column;
+      background: var(--navy-mid);
+      border-top: 1px solid var(--navy-light);
+      padding: 24px 28px;
+      gap: 20px;
+    }
+
+    .nav-mobile.open { display: flex; }
+
+    .nav-mobile a {
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    .nav-mobile a:last-child {
+      color: var(--gold);
+    }
+
+    /* ── Hero ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 64px;
+    }
+
+    .hero-inner {
+      max-width: 720px;
+    }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 28px;
+    }
+
+    .hero-headline {
+      font-size: 64px;
+      font-weight: 300;
+      line-height: 1.1;
+      letter-spacing: -0.5px;
+      color: var(--white);
+      margin-bottom: 28px;
+    }
+
+    .hero-sub {
+      font-size: 18px;
+      font-weight: 300;
+      color: var(--text-muted);
+      max-width: 560px;
+      margin-bottom: 44px;
+      line-height: 1.7;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--navy);
+      background: var(--gold);
+      padding: 14px 32px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+      display: inline-block;
+    }
+
+    .btn-primary:hover { opacity: 0.85; }
+
+    .btn-secondary {
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--white);
+      background: transparent;
+      border: 1px solid var(--navy-light);
+      padding: 14px 32px;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+      display: inline-block;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--text-muted);
+      color: var(--white);
+    }
+
+    /* ── About ── */
+    #about {
+      background: var(--navy-mid);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .about-copy h2 {
+      font-size: 36px;
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+
+    .about-copy p {
+      color: var(--text-muted);
+      font-size: 16px;
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+
+    .stat-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .stat-card {
+      background: var(--navy);
+      border: 1px solid var(--navy-light);
+      padding: 28px 32px;
+    }
+
+    .stat-number {
+      font-size: 40px;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+    }
+
+    /* ── Services ── */
+    #services {}
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .service-card {
+      background: var(--navy-mid);
+      border: 1px solid var(--navy-light);
+      padding: 40px 32px;
+    }
+
+    .service-icon {
+      width: 36px;
+      height: 36px;
+      margin-bottom: 24px;
+    }
+
+    .service-card h3 {
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--white);
+      margin-bottom: 14px;
+    }
+
+    .service-card p {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.75;
+    }
+
+    /* ── Products ── */
+    #products {
+      background: var(--navy-mid);
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .product-card {
+      background: var(--navy);
+      border: 1px solid var(--navy-light);
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .product-tag {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    .product-name {
+      font-size: 22px;
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1.2;
+    }
+
+    .product-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      flex: 1;
+    }
+
+    .product-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 8px;
+    }
+
+    .product-attribution {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    .status-badge {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(232, 196, 74, 0.3);
+      padding: 4px 10px;
+    }
+
+    .status-badge.planning {
+      color: var(--text-muted);
+      border-color: var(--navy-light);
+    }
+
+    /* ── Consulting ── */
+    #consulting {}
+
+    .consulting-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .consulting-left h2 {
+      font-size: 36px;
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+
+    .consulting-left p {
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 32px;
+    }
+
+    .pull-quote {
+      border-left: 2px solid var(--gold);
+      padding-left: 24px;
+      font-size: 18px;
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    .service-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .service-list li {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--navy-light);
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .service-list li:first-child {
+      border-top: 1px solid var(--navy-light);
+    }
+
+    .service-list-icon {
+      color: var(--gold);
+      font-size: 16px;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    .service-list-text strong {
+      display: block;
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+
+    .service-list-text span {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ── Contact ── */
+    #contact {
+      background: var(--navy-mid);
+      text-align: center;
+    }
+
+    .contact-inner {
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    #contact h2 {
+      font-size: 36px;
+      font-weight: 300;
+      margin-bottom: 16px;
+    }
+
+    #contact p {
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 40px;
+    }
+
+    .contact-email {
+      font-size: 20px;
+      font-weight: 300;
+      color: var(--gold);
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      display: block;
+      margin-bottom: 16px;
+      transition: opacity 0.2s;
+    }
+
+    .contact-email:hover { opacity: 0.75; }
+
+    .contact-location {
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--navy);
+      border-top: 1px solid var(--navy-light);
+      padding: 32px 0;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .footer-copy {
+      font-size: 13px;
+      color: var(--text-dim);
+      font-weight: 300;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--text-muted); }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .container { padding: 0 28px; }
+
+      section { padding: 80px 0; }
+
+      .nav-inner { padding: 0 28px; }
+
+      .nav-links,
+      .nav-cta { display: none; }
+
+      .nav-hamburger { display: flex; }
+
+      .hero-headline { font-size: 40px; }
+
+      .hero-sub { font-size: 16px; }
+
+      .about-grid,
+      .consulting-grid { grid-template-columns: 1fr; gap: 48px; }
+
+      .services-grid { grid-template-columns: 1fr; }
+
+      .products-grid { grid-template-columns: 1fr; }
+
+      .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
+
+      .footer-links { flex-wrap: wrap; gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Nav ── -->
+  <nav id="nav">
+    <div class="nav-inner">
+      <a class="nav-logo" href="#hero" aria-label="Solenhive home">
+        <img src="solenhive-logo.svg" alt="Solenhive" />
+      </a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#consulting">Consulting</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a class="nav-cta" href="#contact">Get in touch</a>
+      <button class="nav-hamburger" aria-label="Open menu" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="nav-mobile" id="nav-mobile">
+      <a href="#about" onclick="closeMenu()">About</a>
+      <a href="#services" onclick="closeMenu()">Services</a>
+      <a href="#products" onclick="closeMenu()">Products</a>
+      <a href="#consulting" onclick="closeMenu()">Consulting</a>
+      <a href="#contact" onclick="closeMenu()">Get in touch</a>
+    </div>
+  </nav>
+
+  <!-- ── Hero ── -->
+  <section id="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <p class="hero-eyebrow">Florida-based &mdash; Built to scale</p>
+        <h1 class="hero-headline">Marketing systems that perform.</h1>
+        <p class="hero-sub">We build marketing strategy and digital products for businesses that need results, not reports. Strategy first, execution always.</p>
+        <div class="hero-ctas">
+          <a href="#services" class="btn-primary">Our services</a>
+          <a href="#products" class="btn-secondary">View products</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── About ── -->
+  <section id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-copy">
+          <p class="section-label">About</p>
+          <h2>Strategy and systems, built in Florida.</h2>
+          <div class="section-rule"></div>
+          <p>Solenhive is a marketing strategy and digital ventures firm. We work with businesses to build the systems, products, and strategies that drive measurable growth.</p>
+          <p>We combine deep marketing expertise with hands-on SaaS development — giving clients a partner that thinks strategically and delivers technically.</p>
+          <p>Based in Riverview, Florida. Built for businesses that move fast and expect results.</p>
+        </div>
+        <div class="stat-cards">
+          <div class="stat-card">
+            <div class="stat-number">5</div>
+            <div class="stat-label">SaaS products in development</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">3</div>
+            <div class="stat-label">Core service disciplines</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">1</div>
+            <div class="stat-label">Focus — your results</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Services ── -->
+  <section id="services">
+    <div class="container">
+      <p class="section-label">Services</p>
+      <h2 style="font-size:36px; font-weight:300; margin-bottom:0;">What we do.</h2>
+      <div class="section-rule"></div>
+      <div class="services-grid">
+
+        <div class="service-card">
+          <svg class="service-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0.5" y="0.5" width="35" height="35" stroke="#1e3a5f"/>
+            <polyline points="6,26 13,17 19,21 28,10" stroke="#e8c44a" stroke-width="1.2" fill="none"/>
+            <circle cx="28" cy="10" r="2" fill="#e8c44a"/>
+          </svg>
+          <h3>Marketing Strategy</h3>
+          <p>Audience research, campaign architecture, and performance frameworks. We build marketing programs that are measurable by design — not as an afterthought.</p>
+        </div>
+
+        <div class="service-card">
+          <svg class="service-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0.5" y="0.5" width="35" height="35" stroke="#1e3a5f"/>
+            <rect x="8" y="12" width="8" height="14" stroke="#e8c44a" stroke-width="1.2"/>
+            <rect x="20" y="8" width="8" height="18" stroke="#e8c44a" stroke-width="1.2"/>
+            <line x1="6" y1="28" x2="30" y2="28" stroke="#e8c44a" stroke-width="1.2"/>
+          </svg>
+          <h3>SaaS Development</h3>
+          <p>We design and build software products from the ground up. From concept to code, our products are built for the market — not just the brief.</p>
+        </div>
+
+        <div class="service-card">
+          <svg class="service-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0.5" y="0.5" width="35" height="35" stroke="#1e3a5f"/>
+            <circle cx="18" cy="16" r="6" stroke="#e8c44a" stroke-width="1.2"/>
+            <line x1="18" y1="6" x2="18" y2="10" stroke="#e8c44a" stroke-width="1.2"/>
+            <line x1="18" y1="22" x2="18" y2="26" stroke="#e8c44a" stroke-width="1.2"/>
+            <line x1="8" y1="16" x2="12" y2="16" stroke="#e8c44a" stroke-width="1.2"/>
+            <line x1="24" y1="16" x2="28" y2="16" stroke="#e8c44a" stroke-width="1.2"/>
+          </svg>
+          <h3>Digital Consulting</h3>
+          <p>Fractional strategic support for teams that need senior-level thinking without a full-time hire. Media, digital, analytics, and go-to-market.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Products ── -->
+  <section id="products">
+    <div class="container">
+      <p class="section-label">Products</p>
+      <h2 style="font-size:36px; font-weight:300; margin-bottom:0;">Built by Solenhive.</h2>
+      <div class="section-rule"></div>
+      <div class="products-grid">
+
+        <div class="product-card">
+          <span class="product-tag">Automotive Analytics SaaS</span>
+          <div class="product-name">Dealer Quant</div>
+          <p class="product-desc">Performance analytics for franchise dealerships. Turn media spend and sales data into decisions that move metal.</p>
+          <div class="product-footer">
+            <span class="product-attribution">A Solenhive product</span>
+            <span class="status-badge">In development</span>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <span class="product-tag">Real Estate SaaS</span>
+          <div class="product-name">Fliptify</div>
+          <p class="product-desc">Real estate flip analysis for Florida investors. Model deals, track margins, and move faster with the right numbers.</p>
+          <div class="product-footer">
+            <span class="product-attribution">A Solenhive product</span>
+            <span class="status-badge">In development</span>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <span class="product-tag">Social Intelligence SaaS</span>
+          <div class="product-name">Digital Listening Post</div>
+          <p class="product-desc">Social media intelligence for brands and agencies. Know what's being said, where, and what it means for your market.</p>
+          <div class="product-footer">
+            <span class="product-attribution">A Solenhive product</span>
+            <span class="status-badge planning">Planning</span>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <span class="product-tag">Personal Finance</span>
+          <div class="product-name">Freedom Forge</div>
+          <p class="product-desc">Personal financial planning built around goals, not spreadsheets. Map the path to financial independence.</p>
+          <div class="product-footer">
+            <span class="product-attribution">A Solenhive product</span>
+            <span class="status-badge planning">Planning</span>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <span class="product-tag">Location Intelligence</span>
+          <div class="product-name">Locosol</div>
+          <p class="product-desc">Location intelligence for real estate and local business. Understand who's around you and how to reach them.</p>
+          <div class="product-footer">
+            <span class="product-attribution">A Solenhive product</span>
+            <span class="status-badge">In development</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Consulting ── -->
+  <section id="consulting">
+    <div class="container">
+      <div class="consulting-grid">
+        <div class="consulting-left">
+          <p class="section-label">Consulting</p>
+          <h2>Senior strategy. No overhead.</h2>
+          <div class="section-rule"></div>
+          <p>Most businesses don't need a full-time CMO. They need clear thinking, sharp execution, and a partner who's done it before. That's what Solenhive consulting delivers.</p>
+          <p>We embed with your team — for a project, a quarter, or longer — and do the work that moves the needle.</p>
+          <blockquote class="pull-quote">
+            "Strategy first, execution always."
+          </blockquote>
+        </div>
+        <div class="consulting-right">
+          <ul class="service-list">
+            <li>
+              <span class="service-list-icon">&#9632;</span>
+              <div class="service-list-text">
+                <strong>Media Planning & Buying</strong>
+                <span>Paid search, paid social, programmatic, and traditional. Built around your goals, not channel minimums.</span>
+              </div>
+            </li>
+            <li>
+              <span class="service-list-icon">&#9632;</span>
+              <div class="service-list-text">
+                <strong>Go-to-Market Strategy</strong>
+                <span>Launch planning, audience targeting, and positioning for new products and market entries.</span>
+              </div>
+            </li>
+            <li>
+              <span class="service-list-icon">&#9632;</span>
+              <div class="service-list-text">
+                <strong>Analytics & Reporting</strong>
+                <span>Performance dashboards, attribution modeling, and reporting that surfaces decisions — not just data.</span>
+              </div>
+            </li>
+            <li>
+              <span class="service-list-icon">&#9632;</span>
+              <div class="service-list-text">
+                <strong>Digital Audit</strong>
+                <span>A full review of your digital marketing stack, spend efficiency, and growth opportunities.</span>
+              </div>
+            </li>
+            <li>
+              <span class="service-list-icon">&#9632;</span>
+              <div class="service-list-text">
+                <strong>Fractional CMO</strong>
+                <span>Ongoing strategic leadership for teams that need senior marketing direction without the full-time cost.</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Contact ── -->
+  <section id="contact">
+    <div class="container">
+      <div class="contact-inner">
+        <p class="section-label">Contact</p>
+        <h2>Let's talk.</h2>
+        <div class="section-rule" style="margin-left:auto;margin-right:auto;"></div>
+        <p>Ready to build something that performs? Reach out and we'll get a conversation started.</p>
+        <a class="contact-email" href="mailto:hello@solenhive.com">hello@solenhive.com</a>
+        <p class="contact-location">Riverview, Florida</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-copy">&copy; 2026 Solenhive. All rights reserved.</span>
+      <ul class="footer-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#consulting">Consulting</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      const m = document.getElementById('nav-mobile');
+      m.classList.toggle('open');
+    }
+    function closeMenu() {
+      document.getElementById('nav-mobile').classList.remove('open');
+    }
+
+    // Close mobile menu on resize past breakpoint
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 900) closeMenu();
+    });
+  </script>
+
+</body>
+</html>

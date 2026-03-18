@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 76" width="300" height="76">
+  <defs>
+    <clipPath id="hex-clip">
+      <circle cx="111" cy="27" r="15"/>
+    </clipPath>
+  </defs>
+
+  <!-- Wordmark: solen -->
+  <text x="0" y="40"
+    font-family="'Gill Sans','Gill Sans MT','Trebuchet MS',Calibri,sans-serif"
+    font-size="40" font-weight="300" letter-spacing="2" fill="#0d1b2e">solen</text>
+
+  <!-- Honeycomb circle mark -->
+  <circle cx="111" cy="27" r="15" fill="#0d1b2e"/>
+  <g clip-path="url(#hex-clip)">
+    <g fill="none" stroke="#e8c44a" stroke-width="0.9">
+      <polygon points="111,15 116.8,18.4 116.8,25.2 111,28.6 105.2,25.2 105.2,18.4"/>
+      <polygon points="116.8,25.2 122.6,28.6 122.6,35.4 116.8,38.8 111,35.4 111,28.6"/>
+      <polygon points="105.2,25.2 111,28.6 111,35.4 105.2,38.8 99.4,35.4 99.4,28.6"/>
+      <polygon points="111,35.4 116.8,38.8 116.8,45.6 111,49 105.2,45.6 105.2,38.8"/>
+      <polygon points="99.4,18.4 105.2,21.8 105.2,28.6 99.4,32 93.6,28.6 93.6,21.8"/>
+      <polygon points="122.6,18.4 128.4,21.8 128.4,28.6 122.6,32 116.8,28.6 116.8,21.8"/>
+      <polygon points="111,7.8 116.8,11.2 116.8,18 111,21.4 105.2,18 105.2,11.2"/>
+    </g>
+    <polygon points="111,15 116.8,18.4 116.8,25.2 111,28.6 105.2,25.2 105.2,18.4"
+      fill="#e8c44a" opacity="0.95"/>
+  </g>
+
+  <!-- Wordmark: hive -->
+  <text x="128" y="40"
+    font-family="'Gill Sans','Gill Sans MT','Trebuchet MS',Calibri,sans-serif"
+    font-size="40" font-weight="300" letter-spacing="2" fill="#0d1b2e">hive</text>
+
+  <!-- Divider rule -->
+  <line x1="0" y1="52" x2="300" y2="52" stroke="#0d1b2e" stroke-width="0.4" opacity="0.2"/>
+
+  <!-- Tagline -->
+  <text x="0" y="68"
+    font-family="'Gill Sans','Gill Sans MT','Trebuchet MS',Calibri,sans-serif"
+    font-size="9.5" font-weight="300" letter-spacing="3.5" fill="#5a6a7e">STRATEGY BUILT TO SCALE</text>
+</svg>
