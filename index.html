@@ -82,12 +82,8 @@
 
     .nav-logo img {
       display: block;
-      height: 38px;
+      height: 48px;
       width: auto;
-    }
-
-    /* Inverted logo for nav (dark bg) */
-    .nav-logo img {
       filter: invert(1) sepia(1) saturate(2) hue-rotate(5deg) brightness(1.1);
     }
 
@@ -300,7 +296,11 @@
     }
 
     /* ── Services ── */
-    #services {}
+    #services h2 {
+      font-size: 36px;
+      font-weight: 300;
+      margin-bottom: 0;
+    }
 
     .services-grid {
       display: grid;
@@ -336,6 +336,12 @@
     /* ── Products ── */
     #products {
       background: var(--navy-mid);
+    }
+
+    #products h2 {
+      font-size: 36px;
+      font-weight: 300;
+      margin-bottom: 0;
     }
 
     .products-grid {
@@ -406,7 +412,6 @@
     }
 
     /* ── Consulting ── */
-    #consulting {}
 
     .consulting-grid {
       display: grid;
@@ -611,7 +616,7 @@
         <li><a href="#contact">Contact</a></li>
       </ul>
       <a class="nav-cta" href="#contact">Get in touch</a>
-      <button class="nav-hamburger" aria-label="Open menu" onclick="toggleMenu()">
+      <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-mobile" onclick="toggleMenu(this)">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -673,7 +678,7 @@
   <section id="services">
     <div class="container">
       <p class="section-label">Services</p>
-      <h2 style="font-size:36px; font-weight:300; margin-bottom:0;">What we do.</h2>
+      <h2>What we do.</h2>
       <div class="section-rule"></div>
       <div class="services-grid">
 
@@ -719,7 +724,7 @@
   <section id="products">
     <div class="container">
       <p class="section-label">Products</p>
-      <h2 style="font-size:36px; font-weight:300; margin-bottom:0;">Built by Solenhive.</h2>
+      <h2>Built by Solenhive.</h2>
       <div class="section-rule"></div>
       <div class="products-grid">
 
@@ -788,7 +793,7 @@
           <p>Most businesses don't need a full-time CMO. They need clear thinking, sharp execution, and a partner who's done it before. That's what Solenhive consulting delivers.</p>
           <p>We embed with your team — for a project, a quarter, or longer — and do the work that moves the needle.</p>
           <blockquote class="pull-quote">
-            "Strategy first, execution always."
+            <p>"Strategy first, execution always."</p>
           </blockquote>
         </div>
         <div class="consulting-right">
@@ -863,12 +868,20 @@
   </footer>
 
   <script>
-    function toggleMenu() {
+    function toggleMenu(btn) {
       const m = document.getElementById('nav-mobile');
-      m.classList.toggle('open');
+      const isOpen = m.classList.toggle('open');
+      btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      btn.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
     }
     function closeMenu() {
-      document.getElementById('nav-mobile').classList.remove('open');
+      const m = document.getElementById('nav-mobile');
+      m.classList.remove('open');
+      const btn = document.querySelector('.nav-hamburger');
+      if (btn) {
+        btn.setAttribute('aria-expanded', 'false');
+        btn.setAttribute('aria-label', 'Open menu');
+      }
     }
 
     // Close mobile menu on resize past breakpoint

@@ -133,6 +133,13 @@ All products are described as "A Solenhive product" in any sub-branding context.
 
 ---
 
+## Autonomy
+- Run all tool calls and actions without asking for confirmation unless interruption is truly necessary (e.g., a destructive or irreversible action is about to affect shared infrastructure, remote systems, or data that cannot be recovered)
+- Do not pause to confirm routine file edits, searches, or reads — execute them directly
+- Only interrupt the user when the action is outside the scope of the current request or carries meaningful risk of data loss or unintended side effects
+
+---
+
 ## Do not
 - Do not add npm, package.json, or any build tooling
 - Do not split into multiple files unless explicitly asked
