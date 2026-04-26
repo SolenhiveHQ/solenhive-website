@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms of Service — Solenhive</title>
+  <meta name="description" content="Solenhive Terms of Service — the rules that govern use of our website and services." />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:       #0d1b2e;
+      --navy-mid:   #132238;
+      --navy-light: #1e3a5f;
+      --gold:       #e8c44a;
+      --white:      #ffffff;
+      --text-muted: #8fa3bb;
+      --text-dim:   #5a6a7e;
+      --font: 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', Calibri, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      font-weight: 300;
+      background: var(--navy);
+      color: var(--white);
+      line-height: 1.6;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      background: rgba(13, 27, 46, 0.82);
+      border-bottom: 1px solid var(--navy-light);
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 60px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+    }
+
+    .nav-logo img {
+      display: block;
+      height: 48px;
+      width: auto;
+      filter: invert(1) sepia(1) saturate(2) hue-rotate(5deg) brightness(1.1);
+    }
+
+    .nav-back {
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-back:hover { color: var(--white); }
+
+    /* ── Content ── */
+    .page-wrap {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 140px 60px 120px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 3.5px;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-size: 48px;
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+
+    .effective-date {
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 48px;
+    }
+
+    .section-rule {
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+      margin: 0 0 48px;
+    }
+
+    h2 {
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--white);
+      margin: 48px 0 16px;
+      letter-spacing: 0.3px;
+    }
+
+    p {
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+
+    ul {
+      list-style: none;
+      margin-bottom: 16px;
+    }
+
+    ul li {
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      padding-left: 20px;
+      position: relative;
+      margin-bottom: 8px;
+    }
+
+    ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 12px;
+      width: 6px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    a {
+      color: var(--gold);
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    a:hover { opacity: 0.75; }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--navy);
+      border-top: 1px solid var(--navy-light);
+      padding: 32px 0;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .footer-copy {
+      font-size: 13px;
+      color: var(--text-dim);
+      font-weight: 300;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--text-muted); }
+
+    @media (max-width: 900px) {
+      .nav-inner { padding: 0 28px; }
+      .page-wrap { padding: 120px 28px 80px; }
+      h1 { font-size: 32px; }
+      .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .footer-links { flex-wrap: wrap; gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-logo" href="/" aria-label="Solenhive home">
+        <img src="solenhive-logo.svg" alt="Solenhive" />
+      </a>
+      <a class="nav-back" href="/">← Back to site</a>
+    </div>
+  </nav>
+
+  <div class="page-wrap">
+    <p class="section-label">Legal</p>
+    <h1>Terms of Service</h1>
+    <p class="effective-date">Effective date: April 26, 2026</p>
+    <div class="section-rule"></div>
+
+    <p>These Terms of Service ("Terms") govern your access to and use of the Solenhive website at solenhive.com and any related services (collectively, the "Services") operated by Solenhive ("we," "us," or "our"), a Florida-based company.</p>
+    <p>By accessing or using our Services, you agree to be bound by these Terms. If you do not agree, do not use our Services.</p>
+
+    <h2>Use of Services</h2>
+    <p>You may use our Services only for lawful purposes and in accordance with these Terms. You agree not to:</p>
+    <ul>
+      <li>Use the Services in any way that violates applicable law or regulation</li>
+      <li>Attempt to gain unauthorized access to any part of our Services or systems</li>
+      <li>Transmit any unsolicited or unauthorized advertising or promotional material</li>
+      <li>Impersonate any person or entity or misrepresent your affiliation with any person or entity</li>
+      <li>Interfere with or disrupt the integrity or performance of our Services</li>
+      <li>Scrape, harvest, or collect data from our Services without our express written consent</li>
+    </ul>
+
+    <h2>Intellectual Property</h2>
+    <p>All content on our Services — including text, graphics, logos, icons, images, and software — is the property of Solenhive or its licensors and is protected by applicable intellectual property laws.</p>
+    <p>You may not reproduce, distribute, modify, create derivative works of, publicly display, or exploit any content from our Services without our prior written permission, except for personal, non-commercial viewing purposes.</p>
+    <p>The Solenhive name, logo, and all product names are trademarks of Solenhive. Nothing in these Terms grants you a right to use any trademark.</p>
+
+    <h2>Products in Development</h2>
+    <p>Our Services reference several software products currently in development or planning (including Dealer Quant, Fliptify, Digital Listening Post, Freedom Forge, and Locosol). References to these products on our website are for informational purposes only. We make no guarantee that any product will be released, that it will meet any specific specifications, or that it will be available in any particular timeframe.</p>
+
+    <h2>Disclaimer of Warranties</h2>
+    <p>Our Services are provided "as is" and "as available," without warranty of any kind, express or implied. To the fullest extent permitted by law, Solenhive disclaims all warranties, including but not limited to implied warranties of merchantability, fitness for a particular purpose, and non-infringement.</p>
+    <p>We do not warrant that our Services will be uninterrupted, error-free, or free of viruses or other harmful components.</p>
+
+    <h2>Limitation of Liability</h2>
+    <p>To the fullest extent permitted by applicable law, Solenhive and its officers, directors, employees, and agents shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising out of or related to your use of the Services, even if we have been advised of the possibility of such damages.</p>
+    <p>Our total liability to you for any claim arising out of or related to these Terms or the Services shall not exceed one hundred dollars ($100).</p>
+
+    <h2>Third-Party Links</h2>
+    <p>Our Services may contain links to third-party websites. These links are provided for convenience only. We have no control over the content of those sites and accept no responsibility for them or for any loss or damage that may arise from your use of them.</p>
+
+    <h2>Privacy</h2>
+    <p>Your use of our Services is also governed by our <a href="/privacy-policy.html">Privacy Policy</a>, which is incorporated into these Terms by reference.</p>
+
+    <h2>Governing Law</h2>
+    <p>These Terms shall be governed by and construed in accordance with the laws of the State of Florida, without regard to its conflict of law provisions. Any dispute arising under these Terms shall be subject to the exclusive jurisdiction of the state and federal courts located in Hillsborough County, Florida.</p>
+
+    <h2>Changes to These Terms</h2>
+    <p>We may revise these Terms at any time by updating this page. Changes take effect immediately upon posting. Continued use of our Services after any changes constitutes your acceptance of the revised Terms. We encourage you to review this page periodically.</p>
+
+    <h2>Termination</h2>
+    <p>We reserve the right to terminate or suspend your access to our Services at any time, without notice, for conduct that we believe violates these Terms or is harmful to other users, us, or third parties, or for any other reason at our sole discretion.</p>
+
+    <h2>Contact Us</h2>
+    <p>If you have questions about these Terms, please contact us:</p>
+    <p><a href="mailto:hello@solenhive.com">hello@solenhive.com</a><br />
+    Solenhive &mdash; Riverview, Florida</p>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-copy">&copy; 2026 Solenhive. All rights reserved.</span>
+      <ul class="footer-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="/terms-of-service.html">Terms of Service</a></li>
+      </ul>
+    </div>
+  </footer>
+
+</body>
+</html>
