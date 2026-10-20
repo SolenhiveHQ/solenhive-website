@@ -7,7 +7,7 @@ Single-page marketing website for Solenhive, a Florida-based marketing strategy 
 - Pure HTML, CSS, JavaScript — no frameworks, no build tools
 - Single file: `index.html`
 - Logo: `solenhive-logo.svg`
-- Deployed via Vercel (auto-deploys on push to `main`)
+- Deployed via Vercel (auto-deploys on push to `master`)
 
 ## File structure
 ```
@@ -120,13 +120,13 @@ All products are described as "A Solenhive product" in any sub-branding context.
 
 ## Contact details to update before launch
 - Email: replace `hello@solenhive.com` with real email address
-- Year: update `&copy; 2024` in footer to current year
+- Footer copyright reads `&copy; <year> Marc Carlton LLC. Solenhive is operated by Marc Carlton LLC.` on every page; keep all three pages identical and update the year each January
 - Domain: once live, update any hardcoded URLs
 
 ---
 
 ## Deployment
-- Push to `main` branch on GitHub
+- Push to `master` branch on GitHub (Vercel production branch)
 - Vercel auto-deploys on every push
 - No build step needed — static HTML, deploys instantly
 - Custom domain: `solenhive.com` (connect via Vercel dashboard → Settings → Domains)
