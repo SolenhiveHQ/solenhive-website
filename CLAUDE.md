@@ -6,7 +6,7 @@ Single-page marketing site for Solenhive: paid media strategy plus the software 
 ## Tech stack
 - Pure HTML, CSS, JavaScript — no frameworks, no build tools
 - Pages: `index.html`, `privacy-policy.html`, `terms-of-service.html`
-- Assets: `images/solenhive-logo-dark.svg` (header logo), `favicon-32.png`, `favicon-192.png`, `apple-touch-icon.png`, `images/marc-carlton.{webp,jpg}` (founder photo, 720×900, 4:5)
+- Assets: `images/solenhive-logo-dark.svg` (header logo), `images/solenhive-mark.svg` (mark only, hero seam), `favicon-32.png`, `favicon-192.png`, `apple-touch-icon.png`, `images/marc-carlton.{webp,jpg}` (founder photo, 720×900, 4:5)
 - Fonts: Google Fonts — Barlow Condensed, Work Sans, DM Mono
 - Deployed via Vercel (auto-deploys on push to `master`)
 
@@ -21,6 +21,7 @@ solenhive-website/
 ├── apple-touch-icon.png
 ├── images/
 │   ├── solenhive-logo-dark.svg
+│   ├── solenhive-mark.svg
 │   ├── marc-carlton.webp
 │   └── marc-carlton.jpg
 ├── solenhive-logo.svg      ← old file with live Gill Sans text; not used on the site; never modify
@@ -33,7 +34,8 @@ solenhive-website/
 ## Positioning and copy rules — never violate these
 
 - **Never name products on the public site.** Describe capabilities only (tag & pixel compliance, client reporting, retainers & billing, paid media analytics). Products get white-labeled by partners, so names stay off the site, the legal pages, and meta tags.
-- Headline: "We run the media. We build the tools." (always two lines). Audience: agencies and multi-location brands.
+- Headline: "We run the media." | "We build the tools." — one per half of the split hero. Media side speaks to multi-location brands; tools side to agencies and resellers.
+- The page covers both sides equally: the platform (all four modules), the media practice, and the audit. The scan is proof, not the whole story.
 - Mark a module "Live" only if it runs in production today; otherwise "In build". Never list planning-stage ideas.
 - **No employer references** anywhere in this repo (no current employer, no automaker brand names). The founder bio stays as written unless Marc changes it.
 - No client names, logos, screenshots, or results without the client's written sign-off.
@@ -47,8 +49,17 @@ solenhive-website/
 
 ## Design system
 
+### Concept: the page is shaped like the logo
+The logo is "solen · mark · hive" — two words joined by the honeycomb. The hero repeats that shape: **We run the media** | the mark on a honeycomb seam | **We build the tools** (layout 9, split screen: two sides of the business, one binary choice for the visitor).
+
+### The hive line (what connects everything)
+- A honeycomb edge (zigzag) is the only connective device. It forms the hero seam, then runs down the left gutter through every section (≥1080px), with a hex cell at each section heading that turns gold once the visitor reaches it.
+- On phones the seam turns horizontal between the stacked halves, with the mark on it; the gutter thread is hidden.
+- The same line joins the steps in the platform flow diagrams.
+- Draw it only with the `--hive-v`, `--hive-h`, `--cell`, `--cell-on` tokens in `index.html`. Don't add other connectors, dividers, or decorative hexagons.
+
 ### The one loud element
-The hero's **tag waterfall** — a browser-style timeline of every tag on one real scanned site, with a playhead that sweeps once on load. It is the page's only animation and its only dense, data-heavy element. Everything else stays quiet. Do not add a second showpiece, card grids, or scroll-triggered effects.
+The **tag waterfall** in the platform's first tab — a browser-style timeline of every tag on one real scanned site. Its playhead sweeps once when the waterfall scrolls into view; it is the page's only data-heavy element and only scripted animation. Other platform tabs use simple flow diagrams until real product screens exist (swap in real output when Marc supplies it; never invent numbers).
 
 ### Template tells to keep out
 - No all-caps eyebrow labels above headings; no letter-spaced uppercase anywhere
@@ -90,14 +101,15 @@ The hero's **tag waterfall** — a browser-style timeline of every tag on one re
 ---
 
 ## Home page sections (in order)
-1. **Header** — sticky; logo left; Findings · Platform · Audit · About; "Book an audit"; hamburger below 900px (Escape closes it)
-2. **Hero** — two-line headline, intro, two buttons, the tag waterfall, then the punchline "Six Meta pixels. Two send a PageView. None send a lead."
-3. **Findings** (`#findings`) — four findings from the waterfall's scan, plus the ad platform coverage table
-4. **Platform** (`#platform`) — four modules as a list with Live / In build status, then the white-label statement
-5. **Audit** (`#audit`) — four numbered steps, plus fractional media leadership and measurement setup
-6. **About** (`#about`) — founder photo and bio
-7. **Contact** (`#contact`) — form that composes an email to hello@solenhive.com (no backend yet), with inline validation messages
-8. **Footer** — legal line, Privacy, Terms, email
+1. **Header** — sticky; logo left; Platform · Findings · Media · About; "Book an audit"; hamburger below 900px (Escape closes it)
+2. **Split hero** — left: "For multi-location brands / We run the media." (h1); right: "For agencies and resellers / We build the tools." with the mark on the seam; each side has its own two buttons
+3. **Platform** (`#platform`) — four accessible tabs (arrow keys, Home, End): Tag & pixel compliance (waterfall + punchline), Client reporting, Retainers & billing, Paid media analytics (In build); then the white-label statement
+4. **Findings** (`#findings`) — what broken tracking costs the media budget: four findings from the scan + coverage table (the bridge between the two sides)
+5. **Media** (`#media`) — four practice areas
+6. **Audit** (`#audit`) — four numbered steps, plus fractional media leadership and measurement setup
+7. **About** (`#about`) — founder photo and bio
+8. **Contact** (`#contact`) — form that composes an email to hello@solenhive.com (no backend yet), with inline validation messages
+9. **Footer** — legal line, Privacy, Terms, email
 
 Any element with `data-interest="…"` pre-selects that option in the contact form when clicked.
 
@@ -114,6 +126,7 @@ Any element with `data-interest="…"` pre-selects that option in the contact fo
 - No clipped headings, buttons, or table cells; header stays one row
 - Visible keyboard focus (gold outline); touch targets ≥ 44px; text contrast ≥ 4.5:1
 - `prefers-reduced-motion`: waterfall renders static, no playhead
+- Without JavaScript the waterfall shows its final state and the first tab is visible
 - Review screenshots at phone, tablet, laptop, and large-monitor widths — not just the automated checks
 
 ---
@@ -141,4 +154,4 @@ Any element with `data-interest="…"` pre-selects that option in the contact fo
 
 ---
 
-*CLAUDE.md — Solenhive Website v3.0 · Last updated: October 2026*
+*CLAUDE.md — Solenhive Website v3.1 · Last updated: October 2026*

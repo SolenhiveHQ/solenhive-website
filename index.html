@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Solenhive — Paid media strategy and the software that checks it</title>
-  <meta name="description" content="Solenhive runs paid media strategy for agencies and multi-location brands and builds the software that checks every tag is doing its job. White-label ready." />
+  <title>Solenhive — We run the media. We build the tools.</title>
+  <meta name="description" content="Solenhive runs paid media for multi-location brands and builds the platform agencies use to check tags, report to clients, and bill retainers. White-label ready." />
   <link rel="canonical" href="https://solenhive.com/" />
   <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
   <link rel="icon" href="/favicon-192.png" sizes="192x192" type="image/png" />
@@ -12,7 +12,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Solenhive" />
   <meta property="og:title" content="Solenhive — We run the media. We build the tools." />
-  <meta property="og:description" content="Paid media strategy for agencies and multi-location brands, plus the software that checks every tag is doing its job." />
+  <meta property="og:description" content="Paid media for multi-location brands, and the platform agencies use to check tags, report to clients, and bill retainers." />
   <meta property="og:url" content="https://solenhive.com/" />
   <meta name="twitter:card" content="summary" />
   <meta name="theme-color" content="#0d1b2e" />
@@ -25,13 +25,13 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --navy:       #0d1b2e;
-      --navy-mid:   #132238;
-      --line:       #1e3a5f;
-      --gold:       #e8c44a;
-      --white:      #ffffff;
-      --muted:      #8fa3bb;
-      --alert:      #ff8a7a;
+      --navy:     #0d1b2e;
+      --navy-mid: #132238;
+      --line:     #1e3a5f;
+      --gold:     #e8c44a;
+      --white:    #ffffff;
+      --muted:    #8fa3bb;
+      --alert:    #ff8a7a;
 
       --display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
       --body:    'Work Sans', 'Helvetica Neue', Arial, sans-serif;
@@ -47,7 +47,14 @@
 
       --wrap: 1320px;
       --gutter: clamp(20px, 4.5vw, 64px);
+      --edge: max(var(--gutter), calc((100vw - var(--wrap)) / 2 + var(--gutter)));
       --section: clamp(88px, 11vw, 168px);
+
+      /* The hive line: a honeycomb edge, drawn vertically and horizontally */
+      --hive-v: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='20.8'%3E%3Cpath d='M2 0 L8 10.4 L2 20.8' fill='none' stroke='%238fa3bb' stroke-opacity='.42' stroke-width='1.4'/%3E%3C/svg%3E");
+      --hive-h: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20.8' height='10'%3E%3Cpath d='M0 2 L10.4 8 L20.8 2' fill='none' stroke='%238fa3bb' stroke-opacity='.42' stroke-width='1.4'/%3E%3C/svg%3E");
+      --cell: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='21'%3E%3Cpolygon points='23,10.5 17.5,20 6.5,20 1,10.5 6.5,1 17.5,1' fill='%230d1b2e' stroke='%238fa3bb' stroke-opacity='.6' stroke-width='1.4'/%3E%3C/svg%3E");
+      --cell-on: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='21'%3E%3Cpolygon points='23,10.5 17.5,20 6.5,20 1,10.5 6.5,1 17.5,1' fill='%23e8c44a' stroke='%23e8c44a' stroke-width='1.4'/%3E%3C/svg%3E");
     }
 
     html { scroll-behavior: smooth; scroll-padding-top: 88px; }
@@ -75,7 +82,6 @@
     h2 { font-size: var(--t-2xl); }
     h3 { font-size: var(--t-xl); font-weight: 400; line-height: 1.12; }
     p { max-width: 62ch; }
-    .muted { color: var(--muted); }
 
     /* ── Buttons ── */
     .btn {
@@ -95,6 +101,12 @@
     .btn-gold:hover { background: #f2d466; }
     .btn-line { color: var(--white); border-color: var(--line); background: transparent; }
     .btn-line:hover { border-color: var(--muted); }
+    .ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+
+    .status { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; color: var(--gold); }
+    .status::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+    .status.building { color: var(--muted); }
+    .status.building::before { background: transparent; border: 1px solid currentColor; }
 
     /* ── Header ── */
     .site-header {
@@ -106,13 +118,7 @@
       -webkit-backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--line);
     }
-    .site-header .wrap {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      min-height: 72px;
-    }
+    .site-header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 72px; }
     .logo { display: flex; align-items: center; text-decoration: none; flex: 0 0 auto; }
     .logo img { height: 34px; width: auto; }
     .nav { display: flex; align-items: center; gap: clamp(20px, 2.6vw, 36px); }
@@ -136,30 +142,116 @@
     .menu-btn[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
     .menu-btn[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
 
-    /* ── Hero ── */
-    .hero { padding: clamp(56px, 8vw, 120px) 0 var(--section); }
-    .hero-top { align-items: end; row-gap: 32px; margin-bottom: clamp(40px, 5vw, 72px); }
-    .hero h1 { grid-column: 1 / span 7; font-size: var(--t-3xl); line-height: .94; letter-spacing: -0.02em; }
-    .hero h1 span { display: block; }
-    .hero-side { grid-column: 9 / span 4; }
-    .hero-side p { color: var(--muted); margin-bottom: 28px; }
-    .ctas { display: flex; flex-wrap: wrap; gap: 12px; }
-
-    /* ── Tag waterfall (the one loud element) ── */
-    .scan { background: var(--navy-mid); border: 1px solid var(--line); }
-    .scan-head {
+    /* ── Split-screen hero: media | the mark | tools, like the logo ── */
+    .split { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--line); }
+    .half {
+      --pad-x: clamp(28px, 4vw, 72px);
+      position: relative;
       display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 8px 32px;
-      padding: 20px 28px;
-      border-bottom: 1px solid var(--line);
+      flex-direction: column;
+      justify-content: center;
+      min-height: clamp(520px, calc(100vh - 72px), 860px);
+      padding: clamp(64px, 7vw, 112px) var(--pad-x);
     }
-    .scan-head h2 { font-size: var(--t-lg); font-weight: 400; letter-spacing: 0; }
+    .half-media { padding-left: var(--edge); padding-right: calc(var(--pad-x) + 12px); }
+    .half-tools { padding-right: var(--edge); padding-left: calc(var(--pad-x) + 12px); background: var(--navy-mid); }
+    .half-tools::before {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0; left: -5px;
+      width: 10px;
+      background: var(--hive-v) repeat-y;
+      pointer-events: none;
+    }
+    .half .for { font-size: var(--t-sm); color: var(--gold); margin-bottom: 18px; }
+    .half .big {
+      position: relative;
+      font-family: var(--display);
+      font-weight: 300;
+      font-size: clamp(48px, 5.8vw, 112px);
+      line-height: .95;
+      letter-spacing: -0.02em;
+      margin-bottom: clamp(20px, 2.4vw, 32px);
+    }
+    .half .lede { color: var(--muted); max-width: 40ch; margin-bottom: 32px; }
+    .seam-mark {
+      position: absolute;
+      z-index: 2;
+      width: 76px;
+      height: 76px;
+      left: calc(-1 * (var(--pad-x) + 12px) - 38px);
+      top: calc(.475em - 38px);
+    }
+    .seam-mark-m { display: none; }
+
+    /* ── The thread: the hive line runs down the page, a cell per section ── */
+    .threaded { position: relative; }
+    .threaded::before {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      left: calc(var(--edge) - 34px);
+      width: 10px;
+      background: var(--hive-v) repeat-y;
+      pointer-events: none;
+    }
+    section.block { position: relative; padding: var(--section) 0; border-top: 1px solid var(--line); }
+    .threaded > section.block:first-child { border-top: 0; }
+    section.block::before {
+      content: '';
+      position: absolute;
+      left: calc(var(--edge) - 41px);
+      top: calc(var(--section) + 12px);
+      width: 24px;
+      height: 21px;
+      background: var(--cell) no-repeat;
+    }
+    section.block.on::before { background-image: var(--cell-on); }
+
+    .section-head { margin-bottom: clamp(40px, 5vw, 64px); row-gap: 16px; }
+    .section-head h2 { grid-column: 1 / span 6; }
+    .section-head p { grid-column: 8 / span 5; color: var(--muted); align-self: end; }
+
+    /* ── Platform tabs ── */
+    .tabs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: clamp(16px, 2.4vw, 32px); border-bottom: 1px solid var(--line); margin-bottom: clamp(32px, 4vw, 48px); }
+    .tab {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+      padding: 0 0 18px;
+      margin-bottom: -1px;
+      background: none;
+      border: 0;
+      border-bottom: 2px solid transparent;
+      color: var(--muted);
+      font: inherit;
+      text-align: left;
+      cursor: pointer;
+    }
+    .tab .tname { font-family: var(--display); font-size: var(--t-lg); font-weight: 400; line-height: 1.1; color: var(--muted); }
+    .tab:hover .tname { color: var(--white); }
+    .tab[aria-selected="true"] { border-bottom-color: var(--gold); }
+    .tab[aria-selected="true"] .tname { color: var(--white); }
+    .panel[hidden] { display: none; }
+    .panel-intro { color: var(--muted); margin-bottom: 28px; }
+    .panel-grid { align-items: center; row-gap: 32px; }
+    .panel-copy { grid-column: 1 / span 4; }
+    .panel-copy h3 { margin-bottom: 12px; }
+    .panel-copy p { color: var(--muted); }
+    .flow { grid-column: 6 / span 7; display: flex; align-items: stretch; list-style: none; }
+    .flow .node { flex: 1 1 0; min-width: 0; padding: 18px; background: var(--navy-mid); border: 1px solid var(--line); display: flex; flex-direction: column; gap: 6px; }
+    .flow .node.out { border-color: var(--gold); }
+    .flow .node b { font-family: var(--display); font-weight: 400; font-size: 21px; line-height: 1.15; }
+    .flow .node span { font-size: 14px; color: var(--muted); line-height: 1.45; }
+    .flow .link { flex: 0 0 34px; align-self: center; height: 10px; background: var(--hive-h) repeat-x center; }
+
+    /* ── Tag waterfall ── */
+    .scan { background: var(--navy-mid); border: 1px solid var(--line); }
+    .scan-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px 32px; padding: 20px 28px; border-bottom: 1px solid var(--line); }
+    .scan-head h3 { font-size: var(--t-lg); }
     .scan-head p { font-size: var(--t-sm); color: var(--muted); }
     .scan-head strong { color: var(--white); font-weight: 400; }
-
     .rows { position: relative; padding: 16px 0 8px; }
     .row {
       display: grid;
@@ -175,12 +267,7 @@
     .row .name .n { color: var(--muted); }
     .row.group-start { margin-top: 10px; }
     .track { position: relative; height: 16px; }
-    .track::before {
-      content: '';
-      position: absolute;
-      left: 0; right: 0; top: 50%;
-      border-top: 1px dotted rgba(143, 163, 187, .22);
-    }
+    .track::before { content: ''; position: absolute; left: 0; right: 0; top: 50%; border-top: 1px dotted rgba(143, 163, 187, .22); }
     .bar {
       position: absolute;
       top: 3px;
@@ -190,22 +277,13 @@
       min-width: 3px;
       background: var(--gold);
       transform-origin: left center;
-      animation: grow .7s cubic-bezier(.2, .7, .2, 1) both;
-      animation-delay: calc(250ms + var(--s) * 24ms);
     }
     .bar.silent { background: transparent; border: 1px solid var(--muted); }
-    .evt {
-      position: absolute;
-      top: 3px;
-      left: calc(var(--e) * 1%);
-      width: 10px;
-      height: 10px;
-      margin-left: -5px;
-      background: var(--white);
-      transform: rotate(45deg) scale(.8);
-      animation: pop .3s ease-out both;
-      animation-delay: calc(500ms + var(--e) * 24ms);
-    }
+    .evt { position: absolute; top: 3px; left: calc(var(--e) * 1%); width: 10px; height: 10px; margin-left: -5px; background: var(--white); transform: rotate(45deg) scale(.8); }
+    .scan.armed .bar { transform: scaleX(0); }
+    .scan.armed .evt { opacity: 0; }
+    .scan.play .bar { animation: grow .7s cubic-bezier(.2, .7, .2, 1) both; animation-delay: calc(250ms + var(--s) * 24ms); }
+    .scan.play .evt { animation: pop .3s ease-out both; animation-delay: calc(500ms + var(--e) * 24ms); }
     .result { color: var(--muted); }
     .result.err { color: var(--alert); }
     .result.warn { color: var(--gold); }
@@ -213,66 +291,39 @@
     .row.axis { margin-top: 12px; color: var(--muted); }
     .row.axis .track::before { border-top: 1px solid var(--line); }
     .axis-end { position: absolute; right: 0; top: -2px; transform: translateY(-100%); }
-
     .playhead-layer {
+      display: none;
       position: absolute;
       inset: 16px 0 8px;
-      display: grid;
       grid-template-columns: minmax(150px, 12.5rem) minmax(0, 1fr) minmax(130px, 10.5rem);
       column-gap: 28px;
       padding: 0 28px;
       pointer-events: none;
     }
+    .scan.play .playhead-layer { display: grid; }
     .playhead-col { grid-column: 2; position: relative; }
-    .playhead {
-      position: absolute;
-      top: 0; bottom: 0;
-      width: 2px;
-      margin-left: -1px;
-      background: var(--gold);
-      box-shadow: 0 0 0 3px rgba(232, 196, 74, .12);
-      animation: sweep 2.6s cubic-bezier(.4, 0, .6, 1) .2s both;
-    }
-
-    .legend {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px 28px;
-      padding: 14px 28px 18px;
-      font-size: 14px;
-      color: var(--muted);
-      border-top: 1px solid var(--line);
-    }
+    .playhead { position: absolute; top: 0; bottom: 0; width: 2px; margin-left: -1px; background: var(--gold); box-shadow: 0 0 0 3px rgba(232, 196, 74, .12); animation: sweep 2.6s cubic-bezier(.4, 0, .6, 1) .2s both; }
+    .legend { display: flex; flex-wrap: wrap; gap: 8px 28px; padding: 14px 28px 18px; font-size: 14px; color: var(--muted); border-top: 1px solid var(--line); }
     .legend span { display: inline-flex; align-items: center; gap: 10px; }
     .key { display: inline-block; width: 22px; height: 10px; background: var(--gold); }
     .key.silent { background: transparent; border: 1px solid var(--muted); }
     .key.evt-key { width: 10px; height: 10px; background: var(--white); transform: rotate(45deg) scale(.8); }
-
-    .punchline {
-      margin-top: clamp(32px, 4vw, 56px);
-      font-family: var(--display);
-      font-weight: 300;
-      font-size: var(--t-2xl);
-      line-height: 1.05;
-      max-width: 20ch;
-    }
+    .punchline { margin-top: clamp(32px, 4vw, 56px); font-family: var(--display); font-weight: 300; font-size: var(--t-2xl); line-height: 1.05; max-width: 20ch; }
 
     @keyframes grow  { from { transform: scaleX(0); } to { transform: scaleX(1); } }
     @keyframes pop   { from { opacity: 0; } to { opacity: 1; } }
     @keyframes sweep { 0% { left: 0; opacity: 1; } 88% { opacity: 1; } 100% { left: 100%; opacity: 0; } }
-
     @media (prefers-reduced-motion: reduce) {
-      .bar, .evt { animation: none; }
-      .playhead-layer { display: none; }
+      .scan .bar, .scan .evt { animation: none !important; transform: none; opacity: 1; }
+      .scan .playhead-layer { display: none !important; }
     }
 
-    /* ── Sections ── */
-    section.block { padding: var(--section) 0; border-top: 1px solid var(--line); }
-    .section-head { margin-bottom: clamp(40px, 5vw, 72px); }
-    .section-head h2 { grid-column: 1 / span 6; }
-    .section-head p { grid-column: 8 / span 5; color: var(--muted); align-self: end; }
+    .whitelabel { margin-top: clamp(72px, 9vw, 128px); row-gap: 28px; align-items: end; }
+    .whitelabel h3 { grid-column: 1 / span 8; font-size: var(--t-3xl); font-weight: 300; line-height: .96; letter-spacing: -0.02em; }
+    .whitelabel div { grid-column: 9 / span 4; }
+    .whitelabel p { color: var(--muted); margin-bottom: 24px; }
 
-    /* Findings */
+    /* ── Findings ── */
     .findings { grid-column: 1 / span 7; list-style: none; }
     .finding { padding: 0 0 clamp(32px, 3.5vw, 48px); }
     .finding + .finding { padding-top: clamp(32px, 3.5vw, 48px); border-top: 1px solid var(--line); }
@@ -282,7 +333,6 @@
     .sev.warn { color: var(--gold); }
     .finding h3 { margin-bottom: 10px; }
     .finding p { color: var(--muted); }
-
     .coverage { grid-column: 9 / span 4; align-self: start; position: sticky; top: 112px; }
     .coverage h3 { font-size: var(--t-lg); margin-bottom: 16px; }
     .coverage table { width: 100%; border-collapse: collapse; font-size: var(--t-sm); }
@@ -292,71 +342,32 @@
     .coverage td.err { color: var(--alert); }
     .coverage td.none { color: var(--muted); }
 
-    /* Platform */
-    .ledger { grid-column: 1 / -1; list-style: none; }
-    .ledger li {
-      display: grid;
-      grid-template-columns: repeat(12, minmax(0, 1fr));
-      column-gap: clamp(16px, 2.4vw, 32px);
-      row-gap: 8px;
-      padding: clamp(24px, 2.6vw, 34px) 0;
-      border-top: 1px solid var(--line);
-    }
-    .ledger li:last-child { border-bottom: 1px solid var(--line); }
-    .ledger h3 { grid-column: 1 / span 5; }
-    .status { grid-column: 6 / span 2; display: inline-flex; align-items: center; gap: 10px; font-size: var(--t-sm); padding-top: 8px; color: var(--gold); }
-    .status::before { content: ''; width: 9px; height: 9px; border-radius: 50%; background: currentColor; }
-    .status.building { color: var(--muted); }
-    .status.building::before { background: transparent; border: 1px solid currentColor; }
-    .ledger p { grid-column: 8 / span 5; color: var(--muted); padding-top: 4px; }
+    /* ── Media practice ── */
+    .practice { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(32px, 4vw, 56px) clamp(24px, 4vw, 64px); }
+    .practice h3 { margin-bottom: 10px; }
+    .practice p { color: var(--muted); }
 
-    .whitelabel { margin-top: clamp(72px, 9vw, 128px); row-gap: 28px; align-items: end; }
-    .whitelabel h3 {
-      grid-column: 1 / span 8;
-      font-size: var(--t-3xl);
-      font-weight: 300;
-      line-height: .96;
-      letter-spacing: -0.02em;
-    }
-    .whitelabel div { grid-column: 9 / span 4; }
-    .whitelabel p { color: var(--muted); margin-bottom: 24px; }
-
-    /* Audit */
+    /* ── Audit ── */
     .audit-intro { grid-column: 1 / span 5; }
     .audit-intro h2 { margin-bottom: 20px; }
     .audit-intro p { color: var(--muted); margin-bottom: 32px; }
     .steps { grid-column: 7 / span 6; list-style: none; counter-reset: step; }
-    .steps li {
-      counter-increment: step;
-      display: grid;
-      grid-template-columns: 64px minmax(0, 1fr);
-      gap: 0 20px;
-      padding: 22px 0;
-      border-top: 1px solid var(--line);
-      font-size: var(--t-md);
-    }
+    .steps li { counter-increment: step; display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 0 20px; padding: 22px 0; border-top: 1px solid var(--line); }
     .steps li:last-child { border-bottom: 1px solid var(--line); }
-    .steps li::before {
-      content: counter(step);
-      font-family: var(--display);
-      font-weight: 300;
-      font-size: 44px;
-      line-height: .9;
-      color: var(--gold);
-    }
+    .steps li::before { content: counter(step); font-family: var(--display); font-weight: 300; font-size: 44px; line-height: .9; color: var(--gold); }
     .also { grid-column: 7 / span 6; margin-top: 56px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
     .also h3 { font-size: var(--t-lg); margin-bottom: 8px; }
     .also p { color: var(--muted); font-size: 16px; }
 
-    /* About */
+    /* ── About ── */
     .about { align-items: center; row-gap: 40px; }
     .portrait { grid-column: 1 / span 4; }
     .about-copy { grid-column: 6 / span 6; }
     .about-copy h2 { margin-bottom: 24px; }
     .about-copy p { color: var(--muted); margin-bottom: 16px; }
-    .about-copy p:first-of-type { color: var(--white); font-size: var(--t-lg); line-height: 1.45; font-weight: 300; }
+    .about-copy p:first-of-type { color: var(--white); font-size: var(--t-lg); line-height: 1.45; }
 
-    /* Contact */
+    /* ── Contact ── */
     .contact-intro { grid-column: 1 / span 5; }
     .contact-intro h2 { margin-bottom: 20px; }
     .contact-intro p { color: var(--muted); margin-bottom: 24px; }
@@ -365,24 +376,15 @@
     form { grid-column: 7 / span 6; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     .field { display: flex; flex-direction: column; gap: 8px; font-size: var(--t-sm); color: var(--muted); }
     .field.full { grid-column: 1 / -1; }
-    input, select, textarea {
-      font: 300 17px/1.4 var(--body);
-      color: var(--white);
-      background: var(--navy-mid);
-      border: 1px solid var(--line);
-      border-radius: 0;
-      padding: 13px 14px;
-      min-height: 50px;
-      width: 100%;
-    }
+    input, select, textarea { font: 300 17px/1.4 var(--body); color: var(--white); background: var(--navy-mid); border: 1px solid var(--line); border-radius: 0; padding: 13px 14px; min-height: 50px; width: 100%; }
     select { appearance: none; background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%), linear-gradient(135deg, var(--muted) 50%, transparent 50%); background-position: calc(100% - 20px) 22px, calc(100% - 15px) 22px; background-size: 5px 5px; background-repeat: no-repeat; padding-right: 40px; }
     textarea { min-height: 128px; resize: vertical; }
     input:focus, select:focus, textarea:focus { outline: none; border-color: var(--gold); }
     .form-foot { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
     .form-foot p { font-size: 14px; color: var(--muted); }
-    .form-error { grid-column: 1 / -1; color: var(--alert); font-size: var(--t-sm); min-height: 0; }
+    .form-error { grid-column: 1 / -1; color: var(--alert); font-size: var(--t-sm); }
 
-    /* Footer */
+    /* ── Footer ── */
     .site-footer { border-top: 1px solid var(--line); padding: 36px 0 44px; }
     .site-footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px 32px; }
     .site-footer p { font-size: 14px; color: var(--muted); max-width: none; }
@@ -391,16 +393,13 @@
     .footer-links a:hover { color: var(--white); }
 
     /* ── Large screens ── */
-    @media (min-width: 1800px) {
-      :root { --wrap: 1440px; --t-md: 19px; }
-    }
+    @media (min-width: 1800px) { :root { --wrap: 1440px; --t-md: 19px; } }
 
     /* ── Tablet ── */
     @media (max-width: 1080px) {
-      .hero h1 { grid-column: 1 / -1; }
-      .hero-side { grid-column: 1 / span 8; }
+      .threaded::before, section.block::before { display: none; }
       .section-head h2, .section-head p { grid-column: 1 / -1; }
-      .section-head p { margin-top: 16px; }
+      .panel-copy, .flow { grid-column: 1 / -1; }
       .findings { grid-column: 1 / -1; }
       .coverage { grid-column: 1 / span 8; position: static; margin-top: 24px; }
       .whitelabel h3 { grid-column: 1 / -1; }
@@ -413,21 +412,17 @@
       form { grid-column: 1 / -1; }
     }
 
-    /* ── Mobile nav ── */
+    /* ── Mobile nav + stacked split ── */
     @media (max-width: 900px) {
+      .split { grid-template-columns: 1fr; }
+      .half { min-height: 0; padding: clamp(56px, 11vw, 80px) var(--gutter); }
+      .half-media, .half-tools { padding-left: var(--gutter); padding-right: var(--gutter); }
+      .half-tools::before { top: -5px; bottom: auto; left: 0; right: 0; width: auto; height: 10px; background: var(--hive-h) repeat-x; }
+      .seam-mark { display: none; }
+      .seam-mark-m { display: block; position: absolute; z-index: 2; width: 64px; height: 64px; top: -32px; left: var(--gutter); }
+
       .menu-btn { display: flex; }
-      .nav {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0; right: 0;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0;
-        padding: 8px var(--gutter) 24px;
-        background: var(--navy);
-        border-bottom: 1px solid var(--line);
-      }
+      .nav { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; padding: 8px var(--gutter) 24px; background: var(--navy); border-bottom: 1px solid var(--line); }
       .nav.open { display: flex; }
       .nav a { padding: 14px 0; font-size: 20px; border-bottom: 1px solid var(--line); }
       .nav a.btn { margin-top: 20px; justify-content: center; border-bottom: 0; font-size: 17px; min-height: 52px; }
@@ -435,35 +430,32 @@
 
     /* ── Phone ── */
     @media (max-width: 720px) {
-      .hero-side { grid-column: 1 / -1; }
+      .tabs { grid-template-columns: 1fr 1fr; row-gap: 4px; border-bottom: 0; }
+      .tab { padding: 14px 0 12px; border-bottom: 1px solid var(--line); margin-bottom: 0; }
+      .tab[aria-selected="true"] { border-bottom: 2px solid var(--gold); }
+      .flow { flex-direction: column; }
+      .flow .link { flex: 0 0 28px; width: 10px; height: 28px; align-self: flex-start; margin-left: 22px; background: var(--hive-v) repeat-y; }
       .scan-head { padding: 16px 18px; }
       .rows { padding-top: 12px; }
-      .row {
-        grid-template-columns: minmax(0, 1fr) auto;
-        grid-template-areas: "name result" "track track";
-        row-gap: 6px;
-        padding: 7px 18px;
-      }
+      .row { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "name result" "track track"; row-gap: 6px; padding: 7px 18px; }
       .row .name { grid-area: name; }
       .row .result { grid-area: result; text-align: right; }
       .row .track { grid-area: track; }
       .row.group-start { margin-top: 8px; }
-      .row.axis { grid-template-areas: "name result" "track track"; }
-      .playhead-layer { display: none; }
+      .scan.play .playhead-layer { display: none; }
       .legend { padding: 14px 18px 16px; gap: 8px 20px; }
       .coverage { grid-column: 1 / -1; }
-      .ledger h3, .status, .ledger p { grid-column: 1 / -1; }
-      .status { padding-top: 0; }
       .whitelabel div { grid-column: 1 / -1; }
+      .practice { grid-template-columns: 1fr; }
       .also { grid-template-columns: 1fr; gap: 24px; }
       .portrait { grid-column: 1 / span 9; }
       .about-copy { grid-column: 1 / -1; }
       form { grid-template-columns: 1fr; }
-      .field.half { grid-column: 1 / -1; }
     }
 
     @media (max-width: 380px) {
       .logo img { height: 28px; }
+      .tab .tname { font-size: 20px; }
       .steps li { grid-template-columns: 44px minmax(0, 1fr); }
       .steps li::before { font-size: 36px; }
     }
@@ -489,9 +481,9 @@
         <span></span><span></span><span></span>
       </button>
       <nav class="nav" id="site-nav" aria-label="Primary">
-        <a href="#findings">Findings</a>
         <a href="#platform">Platform</a>
-        <a href="#audit">Audit</a>
+        <a href="#findings">Findings</a>
+        <a href="#media">Media</a>
         <a href="#about">About</a>
         <a class="btn btn-gold" href="#contact" data-interest="A digital audit">Book an audit</a>
       </nav>
@@ -500,287 +492,252 @@
 
   <main id="top">
 
-    <!-- Hero: the scan itself -->
-    <section class="hero">
-      <div class="wrap">
-        <div class="grid hero-top">
-          <h1><span>We run the media.</span> <span>We build the tools.</span></h1>
-          <div class="hero-side">
-            <p>Paid media strategy for agencies and multi-location brands, and the software that checks every tag is doing its job. Use it with us, or under your own name.</p>
-            <div class="ctas">
-              <a class="btn btn-gold" href="#contact" data-interest="A digital audit">Book a digital audit</a>
-              <a class="btn btn-line" href="#findings">Read the findings</a>
-            </div>
-          </div>
+    <!-- Split-screen hero: the logo's shape. Media | the mark | tools -->
+    <section class="split" aria-label="What Solenhive does">
+      <div class="half half-media">
+        <p class="for">For multi-location brands</p>
+        <h1 class="big">We run the media.</h1>
+        <p class="lede">Paid media strategy across Google, Meta, and TikTok. Start with a fixed-scope audit, then keep us on as your media lead.</p>
+        <div class="ctas">
+          <a class="btn btn-gold" href="#contact" data-interest="A digital audit">Book a digital audit</a>
+          <a class="btn btn-line" href="#media">How we run media</a>
         </div>
-
-        <figure class="scan" aria-labelledby="scan-title" aria-describedby="scan-summary">
-          <figcaption class="scan-head">
-            <h2 id="scan-title">One live website, scanned in 18.1 seconds</h2>
-            <p>Compliance <strong>65 / 100</strong>, with <strong>17 errors</strong> and <strong>4 warnings</strong></p>
-          </figcaption>
-
-          <div class="rows" role="list">
-            <div class="row" role="listitem">
-              <span class="name">Tag Manager</span>
-              <span class="track"><i class="bar" style="--s:0;--w:7"></i></span>
-              <span class="result ok">Loaded</span>
-            </div>
-            <div class="row" role="listitem">
-              <span class="name">GA4 <span class="n">× 12</span></span>
-              <span class="track">
-                <i class="bar" style="--s:8;--w:.7"></i><i class="bar" style="--s:9.6;--w:.7"></i><i class="bar" style="--s:11.2;--w:.7"></i><i class="bar" style="--s:12.8;--w:.7"></i><i class="bar" style="--s:14.4;--w:.7"></i><i class="bar" style="--s:16;--w:.7"></i><i class="bar" style="--s:17.6;--w:.7"></i><i class="bar" style="--s:19.2;--w:.7"></i><i class="bar" style="--s:20.8;--w:.7"></i><i class="bar" style="--s:22.4;--w:.7"></i><i class="bar" style="--s:24;--w:.7"></i><i class="bar" style="--s:25.6;--w:.7"></i>
-              </span>
-              <span class="result warn">12 properties</span>
-            </div>
-
-            <div class="row group-start" role="listitem">
-              <span class="name">Meta pixel <span class="n">1</span></span>
-              <span class="track"><i class="bar" style="--s:10;--w:30"></i><i class="evt" style="--e:15"></i></span>
-              <span class="result">PageView only</span>
-            </div>
-            <div class="row" role="listitem">
-              <span class="name">Meta pixel <span class="n">2</span></span>
-              <span class="track"><i class="bar silent" style="--s:11;--w:30"></i></span>
-              <span class="result err">No events</span>
-            </div>
-            <div class="row" role="listitem">
-              <span class="name">Meta pixel <span class="n">3</span></span>
-              <span class="track"><i class="bar" style="--s:12;--w:30"></i><i class="evt" style="--e:17"></i></span>
-              <span class="result">PageView only</span>
-            </div>
-            <div class="row" role="listitem">
-              <span class="name">Meta pixel <span class="n">4</span></span>
-              <span class="track"><i class="bar silent" style="--s:46;--w:24"></i></span>
-              <span class="result err">No events</span>
-            </div>
-            <div class="row" role="listitem">
-              <span class="name">Meta pixel <span class="n">5</span></span>
-              <span class="track"><i class="bar silent" style="--s:13;--w:30"></i></span>
-              <span class="result err">No events</span>
-            </div>
-            <div class="row" role="listitem">
-              <span class="name">Meta pixel <span class="n">6</span></span>
-              <span class="track"><i class="bar silent" style="--s:14;--w:30"></i></span>
-              <span class="result err">No events</span>
-            </div>
-
-            <div class="row group-start" role="listitem">
-              <span class="name">Google Ads <span class="n">× 7</span></span>
-              <span class="track">
-                <i class="bar" style="--s:16;--w:6"></i><i class="evt" style="--e:19"></i>
-                <i class="bar silent" style="--s:24;--w:4"></i><i class="bar silent" style="--s:30;--w:4"></i><i class="bar silent" style="--s:36;--w:4"></i><i class="bar silent" style="--s:42;--w:4"></i><i class="bar silent" style="--s:48;--w:4"></i><i class="bar silent" style="--s:54;--w:4"></i>
-              </span>
-              <span class="result err">6 of 7 silent</span>
-            </div>
-            <div class="row" role="listitem">
-              <span class="name">Bing Ads <span class="n">× 3</span></span>
-              <span class="track"><i class="bar" style="--s:20;--w:5"></i><i class="bar" style="--s:34;--w:5"></i><i class="bar" style="--s:62;--w:5"></i></span>
-              <span class="result ok">Firing</span>
-            </div>
-            <div class="row" role="listitem">
-              <span class="name">TikTok</span>
-              <span class="track"></span>
-              <span class="result">Not found</span>
-            </div>
-
-            <div class="row axis" aria-hidden="true">
-              <span class="name">Page load</span>
-              <span class="track"><span class="axis-end">18.1 s</span></span>
-              <span class="result"></span>
-            </div>
-
-            <div class="playhead-layer" aria-hidden="true"><div class="playhead-col"><div class="playhead"></div></div></div>
-          </div>
-
-          <div class="legend" aria-hidden="true">
-            <span><i class="key"></i>Tag loads and sends data</span>
-            <span><i class="key silent"></i>Tag loads, sends nothing</span>
-            <span><i class="key evt-key"></i>Event sent</span>
-          </div>
-        </figure>
-
-        <p class="punchline" id="scan-summary">Six Meta pixels. Two send a PageView. None send a lead.</p>
       </div>
-    </section>
-
-    <!-- Findings -->
-    <section class="block" id="findings">
-      <div class="wrap">
-        <div class="grid section-head">
-          <h2>What that costs.</h2>
-          <p>Every scan ends in plain-language findings, ranked by what they cost in ad spend and lost data. These four come from the scan above, with the site's identity removed.</p>
-        </div>
-        <div class="grid">
-          <ol class="findings">
-            <li class="finding">
-              <span class="sev err">Error</span>
-              <h3>No lead events reach Meta.</h3>
-              <p>Four of six Meta pixels send nothing; the other two send only PageView. Campaigns optimize without knowing who became a lead.</p>
-            </li>
-            <li class="finding">
-              <span class="sev err">Error</span>
-              <h3>Google Ads can't see conversions.</h3>
-              <p>Six of seven conversion tags never fire, so automated bidding works without the signal it bids on.</p>
-            </li>
-            <li class="finding">
-              <span class="sev warn">Warning</span>
-              <h3>Analytics is split twelve ways.</h3>
-              <p>Twelve GA4 properties fire at once from overlapping scripts, so no single property holds the full picture.</p>
-            </li>
-            <li class="finding">
-              <span class="sev warn">Warning</span>
-              <h3>Tags load more than once.</h3>
-              <p>Seven tag containers load multiple times per page, wasting requests and risking double-counted conversions.</p>
-            </li>
-          </ol>
-
-          <aside class="coverage" aria-labelledby="coverage-title">
-            <h3 id="coverage-title">Ad platform coverage</h3>
-            <table>
-              <thead><tr><th scope="col">Platform</th><th scope="col">Tags</th><th scope="col">Sending data</th></tr></thead>
-              <tbody>
-                <tr><th scope="row">Meta</th><td>6</td><td class="err">2</td></tr>
-                <tr><th scope="row">Google Ads</th><td>7</td><td class="err">1</td></tr>
-                <tr><th scope="row">GA4</th><td>12</td><td>12</td></tr>
-                <tr><th scope="row">Bing Ads</th><td>3</td><td>3</td></tr>
-                <tr><th scope="row">TikTok</th><td class="none">0</td><td class="none">—</td></tr>
-                <tr><th scope="row">Snapchat</th><td class="none">0</td><td class="none">—</td></tr>
-              </tbody>
-            </table>
-          </aside>
+      <div class="half half-tools">
+        <img class="seam-mark-m" src="images/solenhive-mark.svg" width="64" height="64" alt="" />
+        <p class="for">For agencies and resellers</p>
+        <h2 class="big"><img class="seam-mark" src="images/solenhive-mark.svg" width="76" height="76" alt="" />We build the tools.</h2>
+        <p class="lede">One platform for tag compliance, client reporting, and retainer billing. Run it with us, or under your own name, logo, and domain.</p>
+        <div class="ctas">
+          <a class="btn btn-gold" href="#contact" data-interest="The platform or white-label">Talk about white-label</a>
+          <a class="btn btn-line" href="#platform">See the platform</a>
         </div>
       </div>
     </section>
 
-    <!-- Platform -->
-    <section class="block" id="platform">
-      <div class="wrap">
-        <div class="grid section-head">
-          <h2>One platform. Your brand on it.</h2>
-          <p>Running in production today as a multi-tenant platform, with each client's data kept separate. Switch modules on per client.</p>
-        </div>
-        <div class="grid">
-          <ul class="ledger">
-            <li>
-              <h3>Tag &amp; pixel compliance</h3>
-              <span class="status">Live</span>
-              <p>Scans every client site for missing, silent, and duplicate tags across analytics and ad platforms, then lists what to fix.</p>
-            </li>
-            <li>
-              <h3>Client reporting</h3>
-              <span class="status">Live</span>
-              <p>GA4 and Google Ads reporting your team sends to clients without rebuilding the deck every month.</p>
-            </li>
-            <li>
-              <h3>Retainers &amp; billing</h3>
-              <span class="status">Live</span>
+    <div class="threaded">
+
+      <!-- Platform -->
+      <section class="block" id="platform">
+        <div class="wrap">
+          <div class="grid section-head">
+            <h2>Inside the platform.</h2>
+            <p>Four modules on one multi-tenant platform, each client's data kept separate. Switch them on per client, under our name or yours.</p>
+          </div>
+
+          <div class="tabs" role="tablist" aria-label="Platform modules">
+            <button class="tab" type="button" role="tab" id="tab-tags" aria-controls="panel-tags" aria-selected="true"><span class="tname">Tag &amp; pixel compliance</span><span class="status">Live</span></button>
+            <button class="tab" type="button" role="tab" id="tab-reporting" aria-controls="panel-reporting" aria-selected="false" tabindex="-1"><span class="tname">Client reporting</span><span class="status">Live</span></button>
+            <button class="tab" type="button" role="tab" id="tab-billing" aria-controls="panel-billing" aria-selected="false" tabindex="-1"><span class="tname">Retainers &amp; billing</span><span class="status">Live</span></button>
+            <button class="tab" type="button" role="tab" id="tab-analytics" aria-controls="panel-analytics" aria-selected="false" tabindex="-1"><span class="tname">Paid media analytics</span><span class="status building">In build</span></button>
+          </div>
+
+          <div class="panel" role="tabpanel" id="panel-tags" aria-labelledby="tab-tags" tabindex="0">
+            <p class="panel-intro">Scans every client site and shows which tags load, which send data, and which sit silent. This is one real scan, with the site's identity removed.</p>
+
+            <figure class="scan" aria-labelledby="scan-title" aria-describedby="scan-summary">
+              <figcaption class="scan-head">
+                <h3 id="scan-title">One live website, scanned in 18.1 seconds</h3>
+                <p>Compliance <strong>65 / 100</strong>, with <strong>17 errors</strong> and <strong>4 warnings</strong></p>
+              </figcaption>
+              <div class="rows" role="list">
+                <div class="row" role="listitem"><span class="name">Tag Manager</span><span class="track"><i class="bar" style="--s:0;--w:7"></i></span><span class="result ok">Loaded</span></div>
+                <div class="row" role="listitem"><span class="name">GA4 <span class="n">× 12</span></span><span class="track"><i class="bar" style="--s:8;--w:.7"></i><i class="bar" style="--s:9.6;--w:.7"></i><i class="bar" style="--s:11.2;--w:.7"></i><i class="bar" style="--s:12.8;--w:.7"></i><i class="bar" style="--s:14.4;--w:.7"></i><i class="bar" style="--s:16;--w:.7"></i><i class="bar" style="--s:17.6;--w:.7"></i><i class="bar" style="--s:19.2;--w:.7"></i><i class="bar" style="--s:20.8;--w:.7"></i><i class="bar" style="--s:22.4;--w:.7"></i><i class="bar" style="--s:24;--w:.7"></i><i class="bar" style="--s:25.6;--w:.7"></i></span><span class="result warn">12 properties</span></div>
+                <div class="row group-start" role="listitem"><span class="name">Meta pixel <span class="n">1</span></span><span class="track"><i class="bar" style="--s:10;--w:30"></i><i class="evt" style="--e:15"></i></span><span class="result">PageView only</span></div>
+                <div class="row" role="listitem"><span class="name">Meta pixel <span class="n">2</span></span><span class="track"><i class="bar silent" style="--s:11;--w:30"></i></span><span class="result err">No events</span></div>
+                <div class="row" role="listitem"><span class="name">Meta pixel <span class="n">3</span></span><span class="track"><i class="bar" style="--s:12;--w:30"></i><i class="evt" style="--e:17"></i></span><span class="result">PageView only</span></div>
+                <div class="row" role="listitem"><span class="name">Meta pixel <span class="n">4</span></span><span class="track"><i class="bar silent" style="--s:46;--w:24"></i></span><span class="result err">No events</span></div>
+                <div class="row" role="listitem"><span class="name">Meta pixel <span class="n">5</span></span><span class="track"><i class="bar silent" style="--s:13;--w:30"></i></span><span class="result err">No events</span></div>
+                <div class="row" role="listitem"><span class="name">Meta pixel <span class="n">6</span></span><span class="track"><i class="bar silent" style="--s:14;--w:30"></i></span><span class="result err">No events</span></div>
+                <div class="row group-start" role="listitem"><span class="name">Google Ads <span class="n">× 7</span></span><span class="track"><i class="bar" style="--s:16;--w:6"></i><i class="evt" style="--e:19"></i><i class="bar silent" style="--s:24;--w:4"></i><i class="bar silent" style="--s:30;--w:4"></i><i class="bar silent" style="--s:36;--w:4"></i><i class="bar silent" style="--s:42;--w:4"></i><i class="bar silent" style="--s:48;--w:4"></i><i class="bar silent" style="--s:54;--w:4"></i></span><span class="result err">6 of 7 silent</span></div>
+                <div class="row" role="listitem"><span class="name">Bing Ads <span class="n">× 3</span></span><span class="track"><i class="bar" style="--s:20;--w:5"></i><i class="bar" style="--s:34;--w:5"></i><i class="bar" style="--s:62;--w:5"></i></span><span class="result ok">Firing</span></div>
+                <div class="row" role="listitem"><span class="name">TikTok</span><span class="track"></span><span class="result">Not found</span></div>
+                <div class="row axis" aria-hidden="true"><span class="name">Page load</span><span class="track"><span class="axis-end">18.1 s</span></span><span class="result"></span></div>
+                <div class="playhead-layer" aria-hidden="true"><div class="playhead-col"><div class="playhead"></div></div></div>
+              </div>
+              <div class="legend" aria-hidden="true">
+                <span><i class="key"></i>Tag loads and sends data</span>
+                <span><i class="key silent"></i>Tag loads, sends nothing</span>
+                <span><i class="key evt-key"></i>Event sent</span>
+              </div>
+            </figure>
+            <p class="punchline" id="scan-summary">Six Meta pixels. Two send a PageView. None send a lead.</p>
+          </div>
+
+          <div class="panel grid panel-grid" role="tabpanel" id="panel-reporting" aria-labelledby="tab-reporting" tabindex="0" hidden>
+            <div class="panel-copy">
+              <h3>Reports your clients read.</h3>
+              <p>GA4 and Google Ads reporting your team sends to clients without rebuilding the deck every month, in your agency's branding.</p>
+            </div>
+            <ol class="flow" aria-label="How client reporting works">
+              <li class="node"><b>GA4 and Google Ads</b><span>Each client's accounts, connected once</span></li>
+              <li class="link" aria-hidden="true"></li>
+              <li class="node"><b>Your branded report</b><span>Your logo and layout, built for the client</span></li>
+              <li class="link" aria-hidden="true"></li>
+              <li class="node out"><b>Sent to the client</b><span>No deck to rebuild each month</span></li>
+            </ol>
+          </div>
+
+          <div class="panel grid panel-grid" role="tabpanel" id="panel-billing" aria-labelledby="tab-billing" tabindex="0" hidden>
+            <div class="panel-copy">
+              <h3>Retainers that bill themselves.</h3>
               <p>Retainer tracking, hours carryover, statements, and payment links, built for how agencies bill.</p>
-            </li>
-            <li>
-              <h3>Paid media analytics</h3>
-              <span class="status building">In build</span>
-              <p>Google, Meta, and TikTok performance in one view, with budget allocation and wasted-spend checks across locations.</p>
-            </li>
-          </ul>
-        </div>
+            </div>
+            <ol class="flow" aria-label="How retainer billing works">
+              <li class="node"><b>Retainer per client</b><span>Hours and rate set once</span></li>
+              <li class="link" aria-hidden="true"></li>
+              <li class="node"><b>Hours logged</b><span>Tracked against the retainer</span></li>
+              <li class="link" aria-hidden="true"></li>
+              <li class="node"><b>Unused hours carry over</b><span>Into the next cycle, by your rules</span></li>
+              <li class="link" aria-hidden="true"></li>
+              <li class="node out"><b>Statement and payment link</b><span>Sent when you choose</span></li>
+            </ol>
+          </div>
 
-        <div class="grid whitelabel">
-          <h3>Your logo. Your domain. Your client logins.</h3>
-          <div>
-            <p>License the platform under your agency's name, with per-location pricing for agencies and resellers.</p>
-            <a class="btn btn-gold" href="#contact" data-interest="The platform or white-label">Talk about white-label</a>
+          <div class="panel grid panel-grid" role="tabpanel" id="panel-analytics" aria-labelledby="tab-analytics" tabindex="0" hidden>
+            <div class="panel-copy">
+              <h3>Every platform, every location, one view.</h3>
+              <p>Google, Meta, and TikTok performance in one place, with budget allocation and wasted-spend checks across locations. In build now.</p>
+            </div>
+            <ol class="flow" aria-label="How paid media analytics will work">
+              <li class="node"><b>Google, Meta, TikTok</b><span>Spend and results from each</span></li>
+              <li class="link" aria-hidden="true"></li>
+              <li class="node"><b>One view by location</b><span>Compared side by side</span></li>
+              <li class="link" aria-hidden="true"></li>
+              <li class="node out"><b>Where to move budget</b><span>Allocation and wasted-spend checks</span></li>
+            </ol>
+          </div>
+
+          <div class="grid whitelabel">
+            <h3>Your logo. Your domain. Your client logins.</h3>
+            <div>
+              <p>License the platform under your agency's name, with per-location pricing for agencies and resellers.</p>
+              <a class="btn btn-gold" href="#contact" data-interest="The platform or white-label">Talk about white-label</a>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Audit -->
-    <section class="block" id="audit">
-      <div class="wrap grid">
-        <div class="audit-intro">
-          <h2>Start with an audit.</h2>
-          <p>A fixed scope, quoted before we start. You keep the findings whether or not we work together after.</p>
-          <a class="btn btn-gold" href="#contact" data-interest="A digital audit">Book the audit</a>
-        </div>
-        <ol class="steps">
-          <li>We scan every site you run for missing, silent, and duplicate tags.</li>
-          <li>We review your spend across Google, Meta, and TikTok.</li>
-          <li>We rank the measurement gaps by what they cost you.</li>
-          <li>You get a written fix list your team can act on the same week.</li>
-        </ol>
-        <div class="also">
-          <div>
-            <h3>Fractional media leadership</h3>
-            <p>Senior paid media strategy on retainer, for teams that need direction rather than another hire.</p>
+      <!-- Findings: where the tools meet the media -->
+      <section class="block" id="findings">
+        <div class="wrap">
+          <div class="grid section-head">
+            <h2>What broken tracking costs.</h2>
+            <p>Bad tags don't just break reports. They feed the ad platforms the wrong signals, and the media budget pays for it. These four come from the scan above.</p>
           </div>
-          <div>
-            <h3>Measurement setup</h3>
-            <p>GA4, conversion tracking, and consent configured once, correctly, across every location.</p>
+          <div class="grid">
+            <ol class="findings">
+              <li class="finding"><span class="sev err">Error</span><h3>No lead events reach Meta.</h3><p>Four of six Meta pixels send nothing; the other two send only PageView. Campaigns optimize without knowing who became a lead.</p></li>
+              <li class="finding"><span class="sev err">Error</span><h3>Google Ads can't see conversions.</h3><p>Six of seven conversion tags never fire, so automated bidding works without the signal it bids on.</p></li>
+              <li class="finding"><span class="sev warn">Warning</span><h3>Analytics is split twelve ways.</h3><p>Twelve GA4 properties fire at once from overlapping scripts, so no single property holds the full picture.</p></li>
+              <li class="finding"><span class="sev warn">Warning</span><h3>Tags load more than once.</h3><p>Seven tag containers load multiple times per page, wasting requests and risking double-counted conversions.</p></li>
+            </ol>
+            <aside class="coverage" aria-labelledby="coverage-title">
+              <h3 id="coverage-title">Ad platform coverage</h3>
+              <table>
+                <thead><tr><th scope="col">Platform</th><th scope="col">Tags</th><th scope="col">Sending data</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Meta</th><td>6</td><td class="err">2</td></tr>
+                  <tr><th scope="row">Google Ads</th><td>7</td><td class="err">1</td></tr>
+                  <tr><th scope="row">GA4</th><td>12</td><td>12</td></tr>
+                  <tr><th scope="row">Bing Ads</th><td>3</td><td>3</td></tr>
+                  <tr><th scope="row">TikTok</th><td class="none">0</td><td class="none">—</td></tr>
+                  <tr><th scope="row">Snapchat</th><td class="none">0</td><td class="none">—</td></tr>
+                </tbody>
+              </table>
+            </aside>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- About -->
-    <section class="block" id="about">
-      <div class="wrap grid about">
-        <div class="portrait">
-          <picture>
-            <source srcset="images/marc-carlton.webp" type="image/webp" />
-            <img src="images/marc-carlton.jpg" width="720" height="900" loading="lazy" alt="Marc Carlton, founder of Solenhive" />
-          </picture>
-        </div>
-        <div class="about-copy">
-          <h2>Marc Carlton, founder.</h2>
-          <p>Ran his own marketing agency from 2016 to 2019, then built dealer-facing configurators and API integrations.</p>
-          <p>Today he sets paid media strategy for multi-location networks across Google Ads, Meta, TikTok, and GA4, and writes the software that runs it. Solenhive is the studio for that work, based in Riverview, Florida.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact -->
-    <section class="block" id="contact">
-      <div class="wrap grid">
-        <div class="contact-intro">
-          <h2>Tell us what you run.</h2>
-          <p>An audit, a white-label partnership, or a retainer. Send the details and we'll reply with next steps.</p>
-          <a class="contact-email" href="mailto:hello@solenhive.com">hello@solenhive.com</a>
-        </div>
-
-        <form id="contact-form" novalidate>
-          <label class="field half">Name
-            <input type="text" name="name" autocomplete="name" required />
-          </label>
-          <label class="field half">Work email
-            <input type="email" name="email" autocomplete="email" required />
-          </label>
-          <label class="field half">Company
-            <input type="text" name="company" autocomplete="organization" />
-          </label>
-          <label class="field half">Locations or clients
-            <input type="text" name="locations" inputmode="numeric" />
-          </label>
-          <label class="field full">What you need
-            <select name="interest">
-              <option>A digital audit</option>
-              <option>The platform or white-label</option>
-              <option>Fractional media leadership</option>
-              <option>Something else</option>
-            </select>
-          </label>
-          <label class="field full">Anything else
-            <textarea name="message"></textarea>
-          </label>
-          <p class="form-error" id="form-error" role="alert"></p>
-          <div class="form-foot">
-            <button class="btn btn-gold" type="submit">Email the details</button>
-            <p>Opens your email app with everything filled in.</p>
+      <!-- Media practice -->
+      <section class="block" id="media">
+        <div class="wrap">
+          <div class="grid section-head">
+            <h2>How we run the media.</h2>
+            <p>Senior paid media strategy for brands with many locations: one plan, budgets set by location, and measurement checked before a dollar is spent.</p>
           </div>
-        </form>
-      </div>
-    </section>
+          <div class="grid">
+            <div class="practice">
+              <div><h3>Account structure</h3><p>Campaigns organized so every location's spend and results can be read on their own, across Google, Meta, and TikTok.</p></div>
+              <div><h3>Budget by location</h3><p>Spend set and rebalanced per location against what each market returns, not split evenly by habit.</p></div>
+              <div><h3>Creative testing</h3><p>Structured tests on every platform, so the ads that run longest are the ones the data picked.</p></div>
+              <div><h3>Measurement first</h3><p>Every account starts with a tag check, so the platforms optimize on real conversions, not silent pixels.</p></div>
+            </div>
+          </div>
+        </div>
+      </section>
 
+      <!-- Audit -->
+      <section class="block" id="audit">
+        <div class="wrap grid">
+          <div class="audit-intro">
+            <h2>Start with an audit.</h2>
+            <p>A fixed scope, quoted before we start. You keep the findings whether or not we work together after.</p>
+            <a class="btn btn-gold" href="#contact" data-interest="A digital audit">Book the audit</a>
+          </div>
+          <ol class="steps">
+            <li>We scan every site you run for missing, silent, and duplicate tags.</li>
+            <li>We review your spend across Google, Meta, and TikTok.</li>
+            <li>We rank the measurement gaps by what they cost you.</li>
+            <li>You get a written fix list your team can act on the same week.</li>
+          </ol>
+          <div class="also">
+            <div><h3>Fractional media leadership</h3><p>Senior paid media strategy on retainer, for teams that need direction rather than another hire.</p></div>
+            <div><h3>Measurement setup</h3><p>GA4, conversion tracking, and consent configured once, correctly, across every location.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- About -->
+      <section class="block" id="about">
+        <div class="wrap grid about">
+          <div class="portrait">
+            <picture>
+              <source srcset="images/marc-carlton.webp" type="image/webp" />
+              <img src="images/marc-carlton.jpg" width="720" height="900" loading="lazy" alt="Marc Carlton, founder of Solenhive" />
+            </picture>
+          </div>
+          <div class="about-copy">
+            <h2>Marc Carlton, founder.</h2>
+            <p>Ran his own marketing agency from 2016 to 2019, then built dealer-facing configurators and API integrations.</p>
+            <p>Today he sets paid media strategy for multi-location networks across Google Ads, Meta, TikTok, and GA4, and writes the software that runs it. Solenhive is the studio for that work, based in Riverview, Florida.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section class="block" id="contact">
+        <div class="wrap grid">
+          <div class="contact-intro">
+            <h2>Tell us what you run.</h2>
+            <p>An audit, a white-label partnership, or a retainer. Send the details and we'll reply with next steps.</p>
+            <a class="contact-email" href="mailto:hello@solenhive.com">hello@solenhive.com</a>
+          </div>
+          <form id="contact-form" novalidate>
+            <label class="field">Name<input type="text" name="name" autocomplete="name" required /></label>
+            <label class="field">Work email<input type="email" name="email" autocomplete="email" required /></label>
+            <label class="field">Company<input type="text" name="company" autocomplete="organization" /></label>
+            <label class="field">Locations or clients<input type="text" name="locations" inputmode="numeric" /></label>
+            <label class="field full">What you need
+              <select name="interest">
+                <option>A digital audit</option>
+                <option>The platform or white-label</option>
+                <option>Fractional media leadership</option>
+                <option>Something else</option>
+              </select>
+            </label>
+            <label class="field full">Anything else<textarea name="message"></textarea></label>
+            <p class="form-error" id="form-error" role="alert"></p>
+            <div class="form-foot">
+              <button class="btn btn-gold" type="submit">Email the details</button>
+              <p>Opens your email app with everything filled in.</p>
+            </div>
+          </form>
+        </div>
+      </section>
+
+    </div>
   </main>
 
   <footer class="site-footer">
@@ -795,6 +752,8 @@
   </footer>
 
   <script>
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     // Mobile menu
     const menuBtn = document.querySelector('.menu-btn');
     const nav = document.getElementById('site-nav');
@@ -807,6 +766,52 @@
     nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
     document.addEventListener('keydown', e => { if (e.key === 'Escape' && nav.classList.contains('open')) { setMenu(false); menuBtn.focus(); } });
     window.addEventListener('resize', () => { if (window.innerWidth > 900) setMenu(false); });
+
+    // Platform tabs (arrow keys, Home, End)
+    const tabs = [...document.querySelectorAll('[role="tab"]')];
+    function selectTab(tab, focus) {
+      tabs.forEach(t => {
+        const on = t === tab;
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.tabIndex = on ? 0 : -1;
+        document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+      });
+      if (focus) tab.focus();
+    }
+    tabs.forEach((t, i) => {
+      t.addEventListener('click', () => selectTab(t));
+      t.addEventListener('keydown', e => {
+        const k = e.key; let j = null;
+        if (k === 'ArrowRight' || k === 'ArrowDown') j = (i + 1) % tabs.length;
+        if (k === 'ArrowLeft' || k === 'ArrowUp') j = (i - 1 + tabs.length) % tabs.length;
+        if (k === 'Home') j = 0;
+        if (k === 'End') j = tabs.length - 1;
+        if (j !== null) { e.preventDefault(); selectTab(tabs[j], true); }
+      });
+    });
+
+    // Tag waterfall plays once when it scrolls into view (static without JS or with reduced motion)
+    const scan = document.querySelector('.scan');
+    if (scan && 'IntersectionObserver' in window && !reduced) {
+      scan.classList.add('armed');
+      const io = new IntersectionObserver(entries => {
+        if (entries.some(e => e.isIntersecting)) { scan.classList.add('play'); io.disconnect(); }
+      }, { threshold: 0.35 });
+      io.observe(scan);
+    }
+
+    // The hive line: each section's cell turns gold once you reach it
+    const blocks = [...document.querySelectorAll('section.block')];
+    if ('IntersectionObserver' in window) {
+      const reach = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (!e.isIntersecting) return;
+          const idx = blocks.indexOf(e.target);
+          blocks.forEach((b, i) => b.classList.toggle('on', i <= idx));
+        });
+      }, { rootMargin: '-35% 0px -60% 0px' });
+      blocks.forEach(b => reach.observe(b));
+    }
 
     // Buttons pre-select the matching option in the contact form
     const form = document.getElementById('contact-form');
