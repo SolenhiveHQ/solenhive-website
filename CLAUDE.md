@@ -34,6 +34,8 @@ solenhive-website/
 - Mark a module `LIVE` only if it runs in production today; otherwise `IN BUILD`. Never list planning-stage ideas.
 - **No employer references** anywhere in this repo (no current employer, no automaker brand names). The founder bio stays as written unless Marc changes it.
 - No client names, logos, screenshots, or results without the client's written sign-off.
+- Scan report data must stay anonymized: no site URLs, no site-platform vendor names, no automaker or industry-specific terms ("dealer", "OEM").
+- Severity uses color plus a text label (Error / Warn / OK / None), never color alone.
 - No invented stats, prices, or testimonials. If a fact is missing, leave the element out — never ship a `[PLACEHOLDER]`.
 - Headlines 6 words max. Plain English, outcomes first. Never use: "leverage", "synergy", "disrupt", "innovative", "cutting-edge".
 
@@ -49,6 +51,7 @@ solenhive-website/
 --gold:       #e8c44a   ← accents, CTAs, LIVE status
 --white:      #ffffff   ← primary text
 --text-muted: #8fa3bb   ← secondary text (passes 4.5:1 on both navies)
+--alert:      #ff8a7a   ← ERROR severity in scan report UI only (7:1 on navy)
 ```
 `#5a6a7e` (old text-dim) fails contrast for small text — do not use it for text.
 
@@ -67,13 +70,14 @@ solenhive-website/
 
 ## Home page sections (in order)
 1. **Header** — sticky, logo left, nav right (Platform · Services · About · Contact · "Book an audit"); hamburger below 900px
-2. **Hero** — headline, sub, two CTAs, sample site-scan panel (labelled as an example)
+2. **Hero** — headline, sub, two CTAs, scan-result panel (excerpt of the report below, links to `#scan`)
 3. **Proof strip** — "Running in production", three true statements
 4. **Platform** — four capability cards with LIVE / IN BUILD status, then the white-label band
-5. **Services** — Digital audit (featured, fixed scope), Fractional media leadership, Measurement setup
-6. **About** — founder photo + bio + skill chips
-7. **Contact** — copy + email link, and a form that composes an email to hello@solenhive.com (no backend yet)
-8. **Footer** — legal line left, links right
+5. **Inside a scan** (`#scan`) — real report from one live scan, rebuilt in HTML: stats, ad platform coverage, findings. Site identity, vendor names, and industry terms removed. Hero panel numbers must match it.
+6. **Services** — Digital audit (featured, fixed scope), Fractional media leadership, Measurement setup
+7. **About** — founder photo + bio + skill chips
+8. **Contact** — copy + email link, and a form that composes an email to hello@solenhive.com (no backend yet)
+9. **Footer** — legal line left, links right
 
 Any element with `data-interest="…"` pre-selects that option in the contact form when clicked.
 

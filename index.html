@@ -29,6 +29,7 @@
       --gold:       #e8c44a;
       --white:      #ffffff;
       --text-muted: #8fa3bb;
+      --alert:      #ff8a7a;
       --font-display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
       --font-body:    'Work Sans', 'Helvetica Neue', Arial, sans-serif;
       --font-mono:    'DM Mono', ui-monospace, Menlo, monospace;
@@ -192,10 +193,87 @@
       color: var(--text-muted);
     }
     .scan-head span:last-child { font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); }
+    .scan-head span.score { font-family: var(--font-display); font-size: 28px; font-weight: 400; color: var(--white); line-height: 1; letter-spacing: 0; }
+    .scan-head span.score small { font-size: 15px; color: var(--text-muted); margin-left: 2px; }
     .scan-row { font-family: var(--font-mono); font-size: 13px; }
-    .scan-row .pass { color: var(--gold); }
-    .scan-row .flag { border: 1px solid var(--text-muted); padding: 0 8px; }
-    .scan-foot { border-bottom: 0; font-size: 13px; color: var(--text-muted); }
+    .scan-foot { border-bottom: 0; font-size: 14px; }
+    .scan-foot a { text-decoration: none; font-family: var(--font-display); font-weight: 500; letter-spacing: 3px; text-transform: uppercase; font-size: 13px; }
+    .scan-foot a:hover { color: var(--white); }
+
+    /* ── Severity chips (shared by hero panel and report) ── */
+    .sev {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      line-height: 1.5;
+      padding: 1px 8px;
+      border: 1px solid currentColor;
+      white-space: nowrap;
+    }
+    .sev.err  { color: var(--alert); }
+    .sev.warn { color: var(--gold); }
+    .sev.ok   { color: var(--text-muted); }
+    .sev.none { color: var(--text-muted); border-style: dashed; }
+
+    /* ── Scan report ── */
+    .report { background: var(--navy-mid); border: 1px solid var(--navy-light); }
+    .report-head {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px 24px;
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--navy-light);
+    }
+    .report-head .k { margin: 0; }
+    .report-head .mono { font-size: 13px; color: var(--text-muted); }
+    .hairgrid {
+      display: grid;
+      gap: 1px;
+      background: var(--navy-light);
+      border-bottom: 1px solid var(--navy-light);
+    }
+    .hairgrid > * { background: var(--navy-mid); padding: 24px; min-width: 0; }
+    .stats { grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
+    .coverage { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .k {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 13px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+    .v { font-family: var(--font-display); font-weight: 300; font-size: 48px; line-height: 1; margin-bottom: 8px; }
+    .v small { font-size: 20px; color: var(--text-muted); margin-left: 4px; }
+    .v.err { color: var(--alert); }
+    .s { font-size: 14px; color: var(--text-muted); }
+    .sub-head { padding: 20px 24px 0; }
+    .sub-head .k { margin: 0; }
+    .platform { display: flex; flex-direction: column; gap: 6px; }
+    .platform-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 10px; }
+    .platform-top span:first-child { white-space: nowrap; }
+    .platform-top span:first-child { font-size: 16px; font-weight: 400; }
+    .platform .v { font-size: 40px; }
+    .platform .issue { font-size: 14px; color: var(--alert); margin-top: 6px; }
+    .platform .issue.warn { color: var(--gold); }
+    .platform.absent .platform-top span:first-child,
+    .platform.absent .v { color: var(--text-muted); }
+    .findings { list-style: none; }
+    .findings li {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      align-items: baseline;
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--navy-light);
+      font-size: 15px;
+    }
+    .findings .sev { flex: 0 0 64px; text-align: center; }
+    .findings p { flex: 1 1 320px; min-width: 0; }
+    .findings p span { color: var(--text-muted); }
+    .report-foot { padding: 16px 24px; font-size: 13px; color: var(--text-muted); }
 
     /* ── Proof strip ── */
     .proof { padding: 36px 0; }
@@ -244,7 +322,7 @@
     .audit {
       flex: 1.4 1 380px;
       min-width: 0;
-      background: var(--navy);
+      background: var(--navy-mid);
       border: 1px solid var(--gold);
       padding: 40px 32px;
       display: flex;
@@ -266,7 +344,7 @@
     }
     .audit .btn { margin-top: auto; align-self: flex-start; }
     .side-services { flex: 1 1 260px; min-width: 0; display: flex; flex-direction: column; gap: 20px; }
-    .side-services .card { background: var(--navy); flex: 1 1 auto; }
+    .side-services .card { flex: 1 1 auto; }
     .side-services h3 { font-size: 24px; }
 
     /* ── About ── */
@@ -364,6 +442,9 @@
       }
       .nav.open { display: flex; }
       .portrait { flex-basis: 260px; }
+      .coverage { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .hairgrid > * { padding: 20px 16px; }
+      .report-head, .sub-head, .findings li, .report-foot { padding-left: 16px; padding-right: 16px; }
     }
   </style>
 
@@ -427,14 +508,14 @@
           </div>
         </div>
 
-        <figure class="scan" aria-label="Sample site scan">
-          <div class="scan-head"><span>Site scan · sample</span><span>yoursite.com</span></div>
-          <div class="scan-row"><span>GA4 · page_view</span><span class="pass">PASS</span></div>
-          <div class="scan-row"><span>Google Ads · conversion</span><span class="flag">FIRES TWICE</span></div>
-          <div class="scan-row"><span>Meta Pixel · /service</span><span class="flag">MISSING</span></div>
-          <div class="scan-row"><span>TikTok Pixel · base</span><span class="pass">PASS</span></div>
-          <div class="scan-row" style="border-bottom:0"><span>Consent mode</span><span class="pass">PASS</span></div>
-          <figcaption class="scan-foot">Example of the findings a scan returns.</figcaption>
+        <figure class="scan" aria-label="Excerpt from a live site scan">
+          <div class="scan-head"><span>Site scan · live result</span><span class="score">65<small>/100</small></span></div>
+          <div class="scan-row"><span>Meta Pixel</span><span class="sev err">Lead never fires</span></div>
+          <div class="scan-row"><span>Google Ads</span><span class="sev err">6 of 7 silent</span></div>
+          <div class="scan-row"><span>GA4</span><span class="sev warn">12 properties</span></div>
+          <div class="scan-row"><span>Bing Ads</span><span class="sev ok">3 firing</span></div>
+          <div class="scan-row" style="border-bottom:0"><span>TikTok</span><span class="sev none">Not detected</span></div>
+          <figcaption class="scan-foot"><a href="#scan">See the full report</a></figcaption>
         </figure>
       </div>
     </section>
@@ -489,8 +570,93 @@
       </div>
     </section>
 
+    <!-- ── Scan report ── -->
+    <section id="scan" class="band">
+      <div class="container">
+        <p class="label">Inside a scan</p>
+        <h2>What one scan found.</h2>
+        <p class="lede">A real report from one multi-location website, identifying details removed. Each finding says what it costs you.</p>
+
+        <figure class="report" aria-label="Sample scan report">
+          <div class="report-head">
+            <p class="k">Site scan report</p>
+            <span class="mono">site details removed</span>
+          </div>
+
+          <div class="hairgrid stats">
+            <div>
+              <p class="k">Compliance</p>
+              <p class="v">65<small>/100</small></p>
+              <p class="s">Overall tag compliance score</p>
+            </div>
+            <div>
+              <p class="k">Tag platforms</p>
+              <p class="v">2</p>
+              <p class="s">Site platform · GTM</p>
+            </div>
+            <div>
+              <p class="k">Tags detected</p>
+              <p class="v">37</p>
+              <p class="s">6 Meta · 7 Google Ads · 12 GA4</p>
+            </div>
+            <div>
+              <p class="k">Diagnostics</p>
+              <p class="v err">37</p>
+              <p class="s">17 errors · 4 warnings · 16 info</p>
+            </div>
+          </div>
+
+          <div class="sub-head"><p class="k">Ad platform coverage</p></div>
+          <div class="hairgrid coverage" style="margin-top: 16px">
+            <div class="platform">
+              <div class="platform-top"><span>Meta Pixel</span><span class="sev err">Error</span></div>
+              <p class="v">6</p>
+              <p class="s">4 firing</p>
+              <p class="issue">Lead event never fires</p>
+            </div>
+            <div class="platform">
+              <div class="platform-top"><span>Google Ads</span><span class="sev err">Error</span></div>
+              <p class="v">7</p>
+              <p class="s">1 firing</p>
+              <p class="issue">Base code loads, no events fire</p>
+            </div>
+            <div class="platform">
+              <div class="platform-top"><span>GA4</span><span class="sev warn">Warn</span></div>
+              <p class="v">12</p>
+              <p class="s">12 firing</p>
+              <p class="issue warn">12 separate properties</p>
+            </div>
+            <div class="platform">
+              <div class="platform-top"><span>Bing Ads</span><span class="sev ok">OK</span></div>
+              <p class="v">3</p>
+              <p class="s">3 firing</p>
+            </div>
+            <div class="platform absent">
+              <div class="platform-top"><span>TikTok</span><span class="sev none">None</span></div>
+              <p class="v">—</p>
+              <p class="s">Not detected</p>
+            </div>
+            <div class="platform absent">
+              <div class="platform-top"><span>Snapchat</span><span class="sev none">None</span></div>
+              <p class="v">—</p>
+              <p class="s">Not detected</p>
+            </div>
+          </div>
+
+          <div class="sub-head"><p class="k">Findings</p></div>
+          <ul class="findings" style="margin-top: 6px">
+            <li><span class="sev err">Error</span><p>Meta Pixel loads but the Lead event never fires. <span>Likely blocked by consent settings, so Meta spend optimizes without lead data.</span></p></li>
+            <li><span class="sev err">Error</span><p>6 Google Ads conversion tags installed but never fire. <span>Conversions never reach Google, so automated bidding runs blind.</span></p></li>
+            <li><span class="sev warn">Warn</span><p>12 GA4 properties firing at once. <span>Overlapping scripts from the site platform, vendors, and brand-level tags split the data.</span></p></li>
+            <li><span class="sev warn">Warn</span><p>7 tag containers load more than once per page. <span>Wasted requests and possible double-counting.</span></p></li>
+          </ul>
+          <figcaption class="report-foot">Plus 1 more finding and the raw scan data in the full report.</figcaption>
+        </figure>
+      </div>
+    </section>
+
     <!-- ── Services ── -->
-    <section id="services" class="band">
+    <section id="services">
       <div class="container">
         <p class="label">Services</p>
         <h2 style="margin-bottom:56px">Start with an audit.</h2>
@@ -522,7 +688,7 @@
     </section>
 
     <!-- ── About ── -->
-    <section id="about">
+    <section id="about" class="band">
       <div class="container about-grid">
         <div class="portrait">
           <picture>
@@ -547,7 +713,7 @@
     </section>
 
     <!-- ── Contact ── -->
-    <section id="contact" class="band">
+    <section id="contact">
       <div class="container contact-grid">
         <div class="contact-copy">
           <p class="label">Contact</p>
