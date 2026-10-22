@@ -1,13 +1,13 @@
 # Solenhive Website — Claude Code Instructions
 
 ## Project overview
-Single-page marketing site for Solenhive: paid media strategy plus the marketing software behind it, sold to agencies and multi-location brands, white-label ready. Operated by Marc Carlton LLC. Static HTML/CSS/JS on Vercel.
+Single-page marketing site for Solenhive: paid media strategy plus the software that checks every tag is doing its job, sold to agencies and multi-location brands, white-label ready. Operated by Marc Carlton LLC. Static HTML/CSS/JS on Vercel.
 
 ## Tech stack
 - Pure HTML, CSS, JavaScript — no frameworks, no build tools
 - Pages: `index.html`, `privacy-policy.html`, `terms-of-service.html`
-- Assets: `images/solenhive-logo-dark.png` (header logo), `favicon-32.png`, `favicon-192.png`, `apple-touch-icon.png`, `images/marc-carlton.{webp,jpg}` (founder photo, 720×900, 4:5)
-- Fonts: Google Fonts (see Typography)
+- Assets: `images/solenhive-logo-dark.svg` (header logo), `favicon-32.png`, `favicon-192.png`, `apple-touch-icon.png`, `images/marc-carlton.{webp,jpg}` (founder photo, 720×900, 4:5)
+- Fonts: Google Fonts — Barlow Condensed, Work Sans, DM Mono
 - Deployed via Vercel (auto-deploys on push to `master`)
 
 ## File structure
@@ -20,7 +20,7 @@ solenhive-website/
 ├── favicon-192.png
 ├── apple-touch-icon.png
 ├── images/
-│   ├── solenhive-logo-dark.png
+│   ├── solenhive-logo-dark.svg
 │   ├── marc-carlton.webp
 │   └── marc-carlton.jpg
 ├── solenhive-logo.svg      ← old file with live Gill Sans text; not used on the site; never modify
@@ -32,57 +32,72 @@ solenhive-website/
 
 ## Positioning and copy rules — never violate these
 
-- **Never name products on the public site.** Describe capabilities only (tag & pixel compliance, client reporting, paid media analytics, retainers & billing). Products get white-labeled by partners, so names stay off the site, the legal pages, and meta tags.
-- Headline: "We run the media. We build the tools." Audience: agencies and multi-location brands.
-- Mark a module `LIVE` only if it runs in production today; otherwise `IN BUILD`. Never list planning-stage ideas.
+- **Never name products on the public site.** Describe capabilities only (tag & pixel compliance, client reporting, retainers & billing, paid media analytics). Products get white-labeled by partners, so names stay off the site, the legal pages, and meta tags.
+- Headline: "We run the media. We build the tools." (always two lines). Audience: agencies and multi-location brands.
+- Mark a module "Live" only if it runs in production today; otherwise "In build". Never list planning-stage ideas.
 - **No employer references** anywhere in this repo (no current employer, no automaker brand names). The founder bio stays as written unless Marc changes it.
 - No client names, logos, screenshots, or results without the client's written sign-off.
-- Scan report data must stay anonymized: no site URLs, no site-platform vendor names, no automaker or industry-specific terms ("dealer", "OEM").
-- Severity uses color plus a text label (Error / Warn / OK / None), never color alone.
-- No invented stats, prices, or testimonials. If a fact is missing, leave the element out — never ship a `[PLACEHOLDER]`.
-- Headlines 6 words max. Plain English, outcomes first. Never use: "leverage", "synergy", "disrupt", "innovative", "cutting-edge".
+- Scan data must stay anonymized: no site URLs, pixel IDs, site-platform vendor names, or industry-specific terms ("dealer", "OEM", "SRP").
+- Scan numbers must match across the hero waterfall, the punchline, the findings, and the coverage table. "Sending data" means the tag sent events, not just a network request.
+- Severity uses color plus a text label (Error / Warning), never color alone.
+- No invented stats, prices, timings, or testimonials. If a fact is missing, leave the element out — never ship a `[PLACEHOLDER]`.
+- Plain English, sentence case, active voice. Buttons say what happens ("Email the details", not "Submit"). Never use: "leverage", "synergy", "disrupt", "innovative", "cutting-edge".
 
 ---
 
-## Brand rules
+## Design system
+
+### The one loud element
+The hero's **tag waterfall** — a browser-style timeline of every tag on one real scanned site, with a playhead that sweeps once on load. It is the page's only animation and its only dense, data-heavy element. Everything else stays quiet. Do not add a second showpiece, card grids, or scroll-triggered effects.
+
+### Template tells to keep out
+- No all-caps eyebrow labels above headings; no letter-spaced uppercase anywhere
+- No identical bordered card grids; no big-number stat tiles
+- No "A · B · C" meta strings; no arrows appended to links
+- Monospace (DM Mono) only inside the waterfall, nowhere else
+- Numbered markers only for real sequences (the four audit steps)
 
 ### Colors
 ```
---navy:       #0d1b2e   ← primary background
---navy-mid:   #132238   ← alternate section / card background
---navy-light: #1e3a5f   ← borders, logo circle on dark
---gold:       #e8c44a   ← accents, CTAs, LIVE status
---white:      #ffffff   ← primary text
---text-muted: #8fa3bb   ← secondary text (passes 4.5:1 on both navies)
---alert:      #ff8a7a   ← ERROR severity in scan report UI only (7:1 on navy)
+--navy:     #0d1b2e   ← page background
+--navy-mid: #132238   ← waterfall panel, form fields
+--line:     #1e3a5f   ← rules and borders; logo circle
+--gold:     #e8c44a   ← CTAs, firing tags, "Live" status, audit step numbers
+--white:    #ffffff   ← primary text
+--muted:    #8fa3bb   ← secondary text (passes 4.5:1 on both navies)
+--alert:    #ff8a7a   ← Error severity only
 ```
-`#5a6a7e` (old text-dim) fails contrast for small text — do not use it for text.
+`#5a6a7e` fails contrast for small text — do not use it for text.
 
-### Typography (per the brand standard)
-- Display / headings / labels / buttons / nav: **Barlow Condensed** (300 hero, 400 h2, 500 h3 and labels)
-- Body: **Work Sans** 300
-- Data, status tags, email, scan output: **DM Mono**
-- Logo wordmark: never typeset. The logo is always the master artwork (see Logo).
-- Never use weight 600 or 700. All-caps only for labels, nav, buttons, with letter-spacing ≥ 3px.
+### Typography
+- Headings: **Barlow Condensed** 300 (400 for h3), sentence case, tight leading
+- Body: **Work Sans** 300, 18px base (19px at ≥1800px), line length ≤ 62ch
+- Scale: perfect fourth — 15 / 18 / 24 / 32 / 57 / 128 (fluid via clamp)
+- Waterfall data only: **DM Mono** 13px
+- Never use weight 600 or 700
+
+### Layout
+- 12-column grid, left-aligned, max width 1320px (1440px at ≥1800px), gutter `clamp(20px, 4.5vw, 64px)`
+- Section padding `clamp(88px, 11vw, 168px)`, separated by a single 1px rule
+- Breakpoints: 1080px (two-column sections stack), 900px (hamburger menu), 720px (waterfall rows stack name over bar; forms go single column), 380px (smaller logo and step numbers)
 
 ### Logo
-- The header logo is `images/solenhive-logo-dark.png`: Marc's 3000px master PNG with colors swapped for dark backgrounds (navy letters → white, mark circle → `#1e3a5f`, gold unchanged). Letterforms and mark geometry are the master's, untouched. Shown at 36px tall; same `<img>` on all three pages.
-- Header uses the wordmark + mark lockup without the tagline (the tagline is unreadable at header size); the brand standard allows this for app headers.
+- Header logo is `images/solenhive-logo-dark.svg`: a vector traced from Marc's 3000px master PNG. Letterforms and honeycomb geometry are the master's; colors swapped for dark backgrounds only (letters white, circle `#1e3a5f`, cells `#e8c44a`). Shown 34px tall, same `<img>` on all three pages.
+- Header uses wordmark + mark without the tagline (unreadable at header size; the brand standard allows this for app headers).
 - Favicons are cropped from the same master mark.
-- Never retype the wordmark in a font, redraw the mark, or recolor the logo with CSS filters. To regenerate, recolor the master PNG.
+- Never retype the wordmark in a font, redraw the mark, use a downscaled raster, or recolor with CSS filters. To regenerate, re-trace the master.
 
 ---
 
 ## Home page sections (in order)
-1. **Header** — sticky, logo left, nav right (Platform · Services · About · Contact · "Book an audit"); hamburger below 900px
-2. **Hero** — headline, sub, two CTAs, scan-result panel (excerpt of the report below, links to `#scan`)
-3. **Proof strip** — "Running in production", three true statements
-4. **Platform** — four capability cards with LIVE / IN BUILD status, then the white-label band
-5. **Inside a scan** (`#scan`) — real report from one live scan, rebuilt in HTML: stats, ad platform coverage, findings. Site identity, vendor names, and industry terms removed. Hero panel numbers must match it.
-6. **Services** — Digital audit (featured, fixed scope), Fractional media leadership, Measurement setup
-7. **About** — founder photo + bio + skill chips
-8. **Contact** — copy + email link, and a form that composes an email to hello@solenhive.com (no backend yet)
-9. **Footer** — legal line left, links right
+1. **Header** — sticky; logo left; Findings · Platform · Audit · About; "Book an audit"; hamburger below 900px (Escape closes it)
+2. **Hero** — two-line headline, intro, two buttons, the tag waterfall, then the punchline "Six Meta pixels. Two send a PageView. None send a lead."
+3. **Findings** (`#findings`) — four findings from the waterfall's scan, plus the ad platform coverage table
+4. **Platform** (`#platform`) — four modules as a list with Live / In build status, then the white-label statement
+5. **Audit** (`#audit`) — four numbered steps, plus fractional media leadership and measurement setup
+6. **About** (`#about`) — founder photo and bio
+7. **Contact** (`#contact`) — form that composes an email to hello@solenhive.com (no backend yet), with inline validation messages
+8. **Footer** — legal line, Privacy, Terms, email
 
 Any element with `data-interest="…"` pre-selects that option in the contact form when clicked.
 
@@ -94,33 +109,26 @@ Any element with `data-interest="…"` pre-selects that option in the contact fo
 
 ---
 
-## Design rules
-- Dark-first: navy backgrounds only, never white or light
-- Borders for depth — no drop shadows, no gradients on text
-- Sharp corners on buttons, inputs, and cards
-- Max content width 1200px; side gutter `clamp(20px, 4vw, 60px)`
-- Section padding `clamp(72px, 9vw, 120px)`
-- Touch targets ≥ 44px; text contrast ≥ 4.5:1
-- Must work at 390px width with no horizontal scroll
+## Quality floor (check before every push)
+- No horizontal scroll at 320, 360, 390, 414, 768, 834, 1024, 1080, 1180, 1280, 1440, 1680, 1920, 2560 wide, and 844×390 phone landscape
+- No clipped headings, buttons, or table cells; header stays one row
+- Visible keyboard focus (gold outline); touch targets ≥ 44px; text contrast ≥ 4.5:1
+- `prefers-reduced-motion`: waterfall renders static, no playhead
+- Review screenshots at phone, tablet, laptop, and large-monitor widths — not just the automated checks
 
 ---
 
 ## Tracking
-- Amazon Ad Tag in `index.html` `<head>`: PageView on load, `Contact` event on email-link click and form submit.
+- Amazon Ad Tag in `index.html` `<head>`: PageView on load, `Contact` event on any mailto click and form submit.
 - No GA4 yet. When adding it, add consent handling and update the Privacy Policy's tracking section in the same change.
 
 ---
 
 ## Deployment
-- Push to `master` (Vercel production branch); Vercel auto-deploys every push
+- Big visual changes go to a preview branch first; merge to `master` after Marc approves
+- `master` is the Vercel production branch; every push auto-deploys
 - No build step — static files deploy as-is
 - Custom domain: `solenhive.com`
-
----
-
-## Autonomy
-- Run routine edits, searches, and reads without asking
-- Interrupt only for destructive or irreversible actions, or work outside the request
 
 ---
 
@@ -133,4 +141,4 @@ Any element with `data-interest="…"` pre-selects that option in the contact fo
 
 ---
 
-*CLAUDE.md — Solenhive Website v2.0 · Last updated: October 2026*
+*CLAUDE.md — Solenhive Website v3.0 · Last updated: October 2026*
