@@ -1,155 +1,127 @@
 # Solenhive Website — Claude Code Instructions
 
 ## Project overview
-Single-page marketing website for Solenhive, a Florida-based marketing strategy and digital ventures firm. Built in HTML/CSS/JS. Deployed on Vercel via GitHub.
+Single-page marketing site for Solenhive: paid media strategy plus the marketing software behind it, sold to agencies and multi-location brands, white-label ready. Operated by Marc Carlton LLC. Static HTML/CSS/JS on Vercel.
 
 ## Tech stack
 - Pure HTML, CSS, JavaScript — no frameworks, no build tools
-- Single file: `index.html`
-- Logo: `solenhive-logo.svg`
+- Pages: `index.html`, `privacy-policy.html`, `terms-of-service.html`
+- Assets: `favicon.svg`, `images/marc-carlton.{webp,jpg}` (founder photo, 720×900, 4:5)
+- Fonts: Google Fonts (see Typography)
 - Deployed via Vercel (auto-deploys on push to `master`)
 
 ## File structure
 ```
 solenhive-website/
 ├── index.html
-├── solenhive-logo.svg
-├── CLAUDE.md               ← this file
-└── README.md
+├── privacy-policy.html
+├── terms-of-service.html
+├── favicon.svg
+├── images/
+│   ├── marc-carlton.webp
+│   └── marc-carlton.jpg
+├── solenhive-logo.svg      ← original master file, not used on the site; never modify
+├── solenhive-brand-guide.md
+└── CLAUDE.md               ← this file
 ```
 
 ---
 
-## Brand rules — never violate these
+## Positioning and copy rules — never violate these
+
+- **Never name products on the public site.** Describe capabilities only (tag & pixel compliance, client reporting, paid media analytics, retainers & billing). Products get white-labeled by partners, so names stay off the site, the legal pages, and meta tags.
+- Headline: "We run the media. We build the tools." Audience: agencies and multi-location brands.
+- Mark a module `LIVE` only if it runs in production today; otherwise `IN BUILD`. Never list planning-stage ideas.
+- **No employer references** anywhere in this repo (no current employer, no automaker brand names). The founder bio stays as written unless Marc changes it.
+- No client names, logos, screenshots, or results without the client's written sign-off.
+- No invented stats, prices, or testimonials. If a fact is missing, leave the element out — never ship a `[PLACEHOLDER]`.
+- Headlines 6 words max. Plain English, outcomes first. Never use: "leverage", "synergy", "disrupt", "innovative", "cutting-edge".
+
+---
+
+## Brand rules
 
 ### Colors
 ```
 --navy:       #0d1b2e   ← primary background
---navy-mid:   #132238   ← card / section backgrounds
---navy-light: #1e3a5f   ← borders, subtle surfaces
---gold:       #e8c44a   ← accents, CTAs, highlights
---white:      #ffffff   ← primary text on dark
---text-muted: #8fa3bb   ← secondary text
---text-dim:   #5a6a7e   ← tertiary text, tagline
+--navy-mid:   #132238   ← alternate section / card background
+--navy-light: #1e3a5f   ← borders, logo circle on dark
+--gold:       #e8c44a   ← accents, CTAs, LIVE status
+--white:      #ffffff   ← primary text
+--text-muted: #8fa3bb   ← secondary text (passes 4.5:1 on both navies)
 ```
+`#5a6a7e` (old text-dim) fails contrast for small text — do not use it for text.
 
-### Typography
-- Font stack: `'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', Calibri, sans-serif`
-- Weight: always 300 (light) for headlines and body. 400 for UI labels only
-- Never use font-weight 600 or 700
-- Letter-spacing on all-caps: minimum 2px
-- All-caps only for: nav links, section labels, buttons, tagline
+### Typography (per the brand standard)
+- Display / headings / labels / buttons / nav: **Barlow Condensed** (300 hero, 400 h2, 500 h3 and labels)
+- Body: **Work Sans** 300
+- Data, status tags, email, scan output: **DM Mono**
+- Logo wordmark: **Questrial**
+- Never use weight 600 or 700. All-caps only for labels, nav, buttons, with letter-spacing ≥ 3px.
 
 ### Logo
-- The SVG logo file must never be modified
-- On dark/navy backgrounds: use the inverted version (gold circle, dark comb)
-- On light backgrounds: use the standard version (navy circle, gold comb)
-- Always include the tagline "STRATEGY BUILT TO SCALE" beneath when space allows
+- The site uses an inline SVG wordmark: "solen" + honeycomb mark + "hive". On navy: white text, gold hexagons, mark circle `#1e3a5f`. Same markup on all three pages — keep them identical.
+- Never recolor the logo with CSS filters.
 
 ---
 
-## Page sections (in order)
-1. **Nav** — fixed, frosted glass blur, logo left, links center, CTA right
-2. **Hero** — full viewport height, eyebrow + headline + subtext + two CTAs
-3. **About** — two-column: copy left, stat cards right
-4. **Services** — three-column card grid (Marketing Strategy, SaaS Development, Digital Consulting)
-5. **Products** — five product cards (Dealer Quant, Fliptify, Digital Listening Post, Freedom Forge, Locosol)
-6. **Consulting** — two-column: intro + pull quote left, service list right
-7. **Contact** — centered, email link, location
-8. **Footer** — copyright left, nav links right
+## Home page sections (in order)
+1. **Header** — sticky, logo left, nav right (Platform · Services · About · Contact · "Book an audit"); hamburger below 900px
+2. **Hero** — headline, sub, two CTAs, sample site-scan panel (labelled as an example)
+3. **Proof strip** — "Running in production", three true statements
+4. **Platform** — four capability cards with LIVE / IN BUILD status, then the white-label band
+5. **Services** — Digital audit (featured, fixed scope), Fractional media leadership, Measurement setup
+6. **About** — founder photo + bio + skill chips
+7. **Contact** — copy + email link, and a form that composes an email to hello@solenhive.com (no backend yet)
+8. **Footer** — legal line left, links right
 
----
+Any element with `data-interest="…"` pre-selects that option in the contact form when clicked.
 
-## Products reference
-| Product | Category | Status |
-|---|---|---|
-| Dealer Quant | Automotive analytics SaaS | In development |
-| Fliptify | Real estate flip analysis SaaS | In development |
-| Digital Listening Post | Social media intelligence SaaS | Planning |
-| Freedom Forge | Personal financial planning | Planning |
-| Locosol | Location intelligence | In development |
+### Footer legal line (all pages, identical)
+`&copy; <year> Marc Carlton LLC. Solenhive is operated by Marc Carlton LLC.` — update the year each January.
 
-All products are described as "A Solenhive product" in any sub-branding context.
+### Legal pages
+- Operator is defined as "Marc Carlton LLC, doing business as Solenhive". Bump the page's effective date whenever its content (not just styling) changes.
 
 ---
 
 ## Design rules
-- Background is always navy (`#0d1b2e`) — never white or light
-- Cards use `#132238` background with `#1e3a5f` borders
-- Gold (`#e8c44a`) is used sparingly — CTAs, labels, accents only
-- No gradients on text
-- No drop shadows — use borders for depth
-- No rounded corners on buttons — sharp edges only
-- Section padding: 120px top/bottom on desktop, 80px on mobile
-- Max content width: 1100px centered
-- Horizontal padding: 60px desktop, 28px mobile
+- Dark-first: navy backgrounds only, never white or light
+- Borders for depth — no drop shadows, no gradients on text
+- Sharp corners on buttons, inputs, and cards
+- Max content width 1200px; side gutter `clamp(20px, 4vw, 60px)`
+- Section padding `clamp(72px, 9vw, 120px)`
+- Touch targets ≥ 44px; text contrast ≥ 4.5:1
+- Must work at 390px width with no horizontal scroll
 
 ---
 
-## Responsive breakpoints
-- Desktop: 900px+
-- Mobile: below 900px
-  - Hide nav links (hamburger menu or simplify)
-  - Stack all grids to single column
-  - Reduce section padding to 80px
-
----
-
-## What to do when asked to make changes
-
-### Adding a new section
-- Follow the existing pattern: section label (gold, all-caps) → headline → rule → content
-- Add the section to the nav links
-- Add a smooth scroll anchor (`id` on the section)
-
-### Updating copy
-- Keep headlines short — 6 words max
-- Body copy: plain English, no jargon, outcomes-first
-- Never use: "leverage", "synergy", "disrupt", "innovative", "cutting-edge"
-
-### Adding a new product card
-- Use the existing `.product-card` class
-- Always include: tag (category), name, description, status badge
-- Status options: "In development" / "Planning" / "Live" / "Coming soon"
-
-### Changing colors
-- Only use colors from the brand palette above
-- Never introduce new colors without noting them in this file
-
----
-
-## Contact details to update before launch
-- Email: replace `hello@solenhive.com` with real email address
-- Footer copyright reads `&copy; <year> Marc Carlton LLC. Solenhive is operated by Marc Carlton LLC.` on every page; keep all three pages identical and update the year each January
-- Domain: once live, update any hardcoded URLs
+## Tracking
+- Amazon Ad Tag in `index.html` `<head>`: PageView on load, `Contact` event on email-link click and form submit.
+- No GA4 yet. When adding it, add consent handling and update the Privacy Policy's tracking section in the same change.
 
 ---
 
 ## Deployment
-- Push to `master` branch on GitHub (Vercel production branch)
-- Vercel auto-deploys on every push
-- No build step needed — static HTML, deploys instantly
-- Custom domain: `solenhive.com` (connect via Vercel dashboard → Settings → Domains)
+- Push to `master` (Vercel production branch); Vercel auto-deploys every push
+- No build step — static files deploy as-is
+- Custom domain: `solenhive.com`
 
 ---
 
 ## Autonomy
-- Run all tool calls and actions without asking for confirmation unless interruption is truly necessary (e.g., a destructive or irreversible action is about to affect shared infrastructure, remote systems, or data that cannot be recovered)
-- Do not pause to confirm routine file edits, searches, or reads — execute them directly
-- Only interrupt the user when the action is outside the scope of the current request or carries meaningful risk of data loss or unintended side effects
+- Run routine edits, searches, and reads without asking
+- Interrupt only for destructive or irreversible actions, or work outside the request
 
 ---
 
 ## Do not
-- Do not add npm, package.json, or any build tooling
-- Do not split into multiple files unless explicitly asked
-- Do not add external CSS frameworks (Bootstrap, Tailwind, etc.)
-- Do not add JavaScript frameworks (React, Vue, etc.)
-- Do not change the font stack
-- Do not use light backgrounds — this is a dark-first site
-- Do not add placeholder images — use SVG shapes or CSS only
+- Do not add npm, package.json, or build tooling
+- Do not add CSS or JS frameworks
+- Do not name products, clients, or employers (see Positioning)
+- Do not use light backgrounds
+- Do not ship placeholder text or placeholder images
 
 ---
 
-*CLAUDE.md — Solenhive Website v1.0*
-*Last updated: 2024*
+*CLAUDE.md — Solenhive Website v2.0 · Last updated: October 2026*
