@@ -257,7 +257,7 @@
     .section-head p { grid-column: 8 / span 5; color: var(--muted); align-self: end; }
 
     /* ── Platform tabs ── */
-    .tabs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: clamp(16px, 2.4vw, 32px); border-bottom: 1px solid var(--line); margin-bottom: clamp(32px, 4vw, 48px); }
+    .tabs { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); column-gap: clamp(16px, 2.4vw, 32px); border-bottom: 1px solid var(--line); margin-bottom: clamp(32px, 4vw, 48px); }
     .tab {
       display: flex;
       flex-direction: column;
@@ -290,6 +290,21 @@
     .flow .node span { font-size: 14px; color: var(--muted); line-height: 1.45; }
     .flow .link { flex: 0 0 34px; align-self: center; height: 10px; background: var(--hive-h) repeat-x center; }
 
+    .planner { grid-column: 6 / span 7; padding: 24px 26px; background: var(--navy-mid); border: 1px solid var(--line); }
+    .pl-in { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+    .pl-in dt { font-size: 13px; color: var(--muted); }
+    .pl-in dd { font-size: 17px; }
+    .pl-out { padding: 18px 0 14px; }
+    .pl-label { font-size: 14px; color: var(--muted); }
+    .pl-big { font-family: var(--display); font-weight: 300; font-size: clamp(40px, 4vw, 56px); line-height: 1.05; color: var(--gold); }
+    .pl-big span { font-size: 20px; color: var(--muted); }
+    .mix { display: flex; height: 14px; gap: 2px; margin-bottom: 14px; }
+    .mix i { flex: var(--p) 0 0; background: rgba(232, 196, 74, var(--o)); }
+    .mix-key { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 14px; color: var(--muted); }
+    .mix-key li { display: inline-flex; align-items: center; gap: 8px; }
+    .mix-key i { width: 12px; height: 12px; background: rgba(232, 196, 74, var(--o)); }
+    .mix-key b { color: var(--white); font-weight: 400; }
+    .planner figcaption { margin-top: 16px; font-size: 14px; color: var(--muted); }
     .cycles { grid-column: 6 / span 7; display: flex; flex-wrap: wrap; align-items: stretch; }
     .cycle { flex: 1 1 220px; min-width: 0; padding: 20px 22px; background: var(--navy-mid); border: 1px solid var(--line); }
     .cyc-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-family: var(--display); font-size: 22px; font-weight: 400; margin-bottom: 4px; max-width: none; }
@@ -458,7 +473,7 @@
     @media (max-width: 1080px) {
       .threaded::before, section.block::before { display: none; }
       .section-head h2, .section-head p { grid-column: 1 / -1; }
-      .panel-copy, .flow, .cycles { grid-column: 1 / -1; }
+      .panel-copy, .flow, .cycles, .planner { grid-column: 1 / -1; }
       .findings { grid-column: 1 / -1; }
       .coverage { grid-column: 1 / span 8; position: static; margin-top: 24px; }
       .whitelabel h3 { grid-column: 1 / -1; }
@@ -502,6 +517,8 @@
       .tab { padding: 14px 0 12px; border-bottom: 1px solid var(--line); margin-bottom: 0; }
       .tab[aria-selected="true"] { border-bottom: 2px solid var(--gold); }
       .flow { flex-direction: column; }
+      .pl-in { grid-template-columns: 1fr 1fr; }
+      .planner { padding: 20px 18px; }
       .cycles { flex-direction: column; }
       .carry { flex: 0 0 auto; flex-direction: row; justify-content: flex-start; padding: 12px 0 12px 22px; }
       .carry::before { width: 10px; height: 34px; background: var(--hive-v) repeat-y; }
@@ -610,6 +627,7 @@
               <li><b>Client reporting <span class="status">Live</span></b><span>GA4 and Google Ads reports in your branding, without the monthly rebuild.</span></li>
               <li><b>Retainers &amp; billing <span class="status">Live</span></b><span>Hours, carryover, statements, and payment links, built for agencies.</span></li>
               <li><b>Paid media analytics <span class="status building">In build</span></b><span>Every platform and location in one view, with budget checks.</span></li>
+              <li><b>Search &amp; AI visibility <span class="status building">In build</span></b><span>SEO checks plus whether AI assistants find and recommend you.</span></li>
             </ul>
             <div class="ctas">
               <a class="btn btn-gold" href="#contact" data-interest="The platform or white-label">Talk about white-label</a>
@@ -635,7 +653,7 @@
         <div class="wrap">
           <div class="grid section-head">
             <h2>Inside the platform.</h2>
-            <p>Four modules on one multi-tenant platform, each client's data kept separate. Switch them on per client, under our name or yours.</p>
+            <p>Five modules on one multi-tenant platform, each client's data kept separate. Switch them on per client, under our name or yours.</p>
           </div>
 
           <div class="tabs" role="tablist" aria-label="Platform modules">
@@ -643,6 +661,7 @@
             <button class="tab" type="button" role="tab" id="tab-reporting" aria-controls="panel-reporting" aria-selected="false" tabindex="-1"><span class="tname">Client reporting</span><span class="status">Live</span></button>
             <button class="tab" type="button" role="tab" id="tab-billing" aria-controls="panel-billing" aria-selected="false" tabindex="-1"><span class="tname">Retainers &amp; billing</span><span class="status">Live</span></button>
             <button class="tab" type="button" role="tab" id="tab-analytics" aria-controls="panel-analytics" aria-selected="false" tabindex="-1"><span class="tname">Paid media analytics</span><span class="status building">In build</span></button>
+            <button class="tab" type="button" role="tab" id="tab-search" aria-controls="panel-search" aria-selected="false" tabindex="-1"><span class="tname">Search &amp; AI visibility</span><span class="status building">In build</span></button>
           </div>
 
           <div class="panel" role="tabpanel" id="panel-tags" aria-labelledby="tab-tags" tabindex="0">
@@ -717,14 +736,43 @@
           <div class="panel grid panel-grid" role="tabpanel" id="panel-analytics" aria-labelledby="tab-analytics" tabindex="0" hidden>
             <div class="panel-copy">
               <h3>Every platform, every location, one view.</h3>
-              <p>Google, Meta, and TikTok performance in one place, with budget allocation and wasted-spend checks across locations. In build now.</p>
+              <p>Google, Meta, and TikTok performance in one place, with budget allocation and wasted-spend checks across locations. The budget planner runs today; live platform data is in build.</p>
             </div>
-            <ol class="flow" aria-label="How paid media analytics will work">
-              <li class="node"><b>Google, Meta, TikTok</b><span>Spend and results from each</span></li>
+            <figure class="planner" aria-label="Budget planner output for one example">
+              <dl class="pl-in">
+                <div><dt>Sales now</dt><dd>100 a month</dd></div>
+                <div><dt>Spend now</dt><dd>$4,000 a month</dd></div>
+                <div><dt>Target</dt><dd>150 a month</dd></div>
+              </dl>
+              <div class="pl-out">
+                <p class="pl-label">Recommended media spend</p>
+                <p class="pl-big">$41,250 <span>a month</span></p>
+              </div>
+              <div class="mix" role="img" aria-label="Channel split: search 36 percent, Performance Max 15 percent, Meta 20 percent, social and brand 17 percent, video and streaming 11 percent">
+                <i style="--p:36;--o:1"></i><i style="--p:15;--o:.74"></i><i style="--p:20;--o:.54"></i><i style="--p:17;--o:.38"></i><i style="--p:11;--o:.24"></i>
+              </div>
+              <ul class="mix-key">
+                <li><i style="--o:1"></i><b>36%</b> Search</li>
+                <li><i style="--o:.74"></i><b>15%</b> Performance Max</li>
+                <li><i style="--o:.54"></i><b>20%</b> Meta</li>
+                <li><i style="--o:.38"></i><b>17%</b> Social and brand</li>
+                <li><i style="--o:.24"></i><b>11%</b> Video and streaming</li>
+              </ul>
+              <figcaption>Real planner output for one example, assuming an 8% close rate and $1.10 per click. Inputs are set per client.</figcaption>
+            </figure>
+          </div>
+
+          <div class="panel grid panel-grid" role="tabpanel" id="panel-search" aria-labelledby="tab-search" tabindex="0" hidden>
+            <div class="panel-copy">
+              <h3>Found by search engines and AI assistants.</h3>
+              <p>The classic SEO checks, plus whether AI assistants can find your site, understand it, and recommend it when someone asks.</p>
+            </div>
+            <ol class="flow" aria-label="The three layers of AI visibility">
+              <li class="node"><b>Discovery</b><span>Can AI agents find the site? Sitemaps, robots.txt, llms.txt, crawlability.</span></li>
               <li class="link" aria-hidden="true"></li>
-              <li class="node"><b>One view by location</b><span>Compared side by side</span></li>
+              <li class="node"><b>Context</b><span>Can they understand it? Structured data and clean markup.</span></li>
               <li class="link" aria-hidden="true"></li>
-              <li class="node out"><b>Where to move budget</b><span>Allocation and wasted-spend checks</span></li>
+              <li class="node out"><b>Consumption</b><span>Will they recommend it? Clear content and citation-ready facts.</span></li>
             </ol>
           </div>
 

@@ -33,13 +33,14 @@ solenhive-website/
 
 ## Positioning and copy rules — never violate these
 
-- **Never name products on the public site.** Describe capabilities only (tag & pixel compliance, client reporting, retainers & billing, paid media analytics). Products get white-labeled by partners, so names stay off the site, the legal pages, and meta tags.
+- **Never name products on the public site.** Describe capabilities only (tag & pixel compliance, client reporting, retainers & billing, paid media analytics, search & AI visibility). Products get white-labeled by partners, so names stay off the site, the legal pages, and meta tags.
 - Headline: "We run the media." | "We build the tools." — one per half of the split hero. Media side speaks to multi-location brands; tools side to agencies and resellers.
-- The page covers both sides equally: the platform (all four modules), the media practice, and the audit. The scan is proof, not the whole story.
+- The page covers both sides equally: the platform (all five modules), the media practice, and the audit. The scan is proof, not the whole story.
 - Mark a module "Live" only if it runs in production today; otherwise "In build". Never list planning-stage ideas.
 - **No employer references** anywhere in this repo (no current employer, no automaker brand names). The founder bio stays as written unless Marc changes it.
 - No client names, logos, screenshots, or results without the client's written sign-off.
 - Scan data must stay anonymized: no site URLs, pixel IDs, site-platform vendor names, or industry-specific terms ("dealer", "OEM", "SRP").
+- Paid media analytics tab shows real budget-planner output for the example saved in the planner (inputs, recommended media spend, five-channel split). Never show the source dealer, brand, fee line, per-unit gross, or automotive channel terms (VDP, AIA).
 - Billing tab shows two real retainer cycles from the invoicing app: hours only. Never show client names, rates, dollar amounts, invoice numbers, or time-entry descriptions (they name clients' customers).
 - Scan numbers must match across the hero waterfall, the punchline, the findings, and the coverage table. "Sending data" means the tag sent events, not just a network request.
 - Severity uses color plus a text label (Error / Warning), never color alone.
@@ -104,7 +105,7 @@ The **tag waterfall** in the platform's first tab — a browser-style timeline o
 ## Home page sections (in order)
 1. **Header** — sticky; logo left; Platform · Findings · Media (slides the hero) · About; "Book an audit"; hamburger below 900px (Escape closes it)
 2. **Sliding split hero** — left: "For multi-location brands / We run the media." (h1); right: "For agencies and resellers / We build the tools." The mark is a drag handle (`role="slider"`, arrow keys, Home/End, Enter centers) on the hive-line seam. Snap points: 24 / 50 / 76. Dragging or "How we run media" / "See the platform" opens that side: its intro is replaced by detail (media practice areas, or the four modules), and the other side narrows to its headline plus a "Show media" / "Show tools" button. Height `clamp(520px, 66vh, 640px)`. Below 901px there is no slider: halves stack, the seam turns horizontal with the mark on it, and the same buttons expand each side's detail in place. The nav's "Media" link slides to the media side.
-3. **Platform** (`#platform`) — four accessible tabs (arrow keys, Home, End): Tag & pixel compliance (waterfall + punchline), Client reporting, Retainers & billing, Paid media analytics (In build); then the white-label statement
+3. **Platform** (`#platform`) — five accessible tabs (arrow keys, Home, End): Tag & pixel compliance (waterfall + punchline), Client reporting (flow), Retainers & billing (two real cycles), Paid media analytics (In build; real planner output), Search & AI visibility (In build; discovery, context, consumption flow); then the white-label statement
 4. **Findings** (`#findings`) — what broken tracking costs the media budget: four findings from the scan + coverage table (the bridge between the two sides)
 5. **Audit** (`#audit`) — four numbered steps, plus fractional media leadership and measurement setup
 6. **About** (`#about`) — founder photo and bio
@@ -154,4 +155,4 @@ Any element with `data-interest="…"` pre-selects that option in the contact fo
 
 ---
 
-*CLAUDE.md — Solenhive Website v3.2 · Last updated: October 2026*
+*CLAUDE.md — Solenhive Website v3.3 · Last updated: October 2026*
