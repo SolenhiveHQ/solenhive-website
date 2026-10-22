@@ -134,7 +134,12 @@ Any element with `data-interest="…"` pre-selects that option in the contact fo
 
 ## Tracking
 - Amazon Ad Tag in `index.html` `<head>`: PageView on load, `Contact` event on any mailto click and form submit.
-- No GA4 yet. When adding it, add consent handling and update the Privacy Policy's tracking section in the same change.
+- The tag is NOT loaded when the browser sends Global Privacy Control or Do Not Track (a no-op `window.amzn` is set first). No `<noscript>` pixel: it can't check those signals. The Privacy Policy promises this behavior — keep them in sync.
+- No GA4 yet. When adding it, apply the same signal check, add consent handling, and update the Privacy Policy in the same change.
+
+### Policy pages must match the site
+- Privacy Policy lists every service that touches visitor data (Vercel, Google Fonts, Amazon Ads, Google Workspace), Amazon's required interest-based-ads disclosure and opt-out links, and the GPC/DNT behavior. Adding or removing any third-party script, font, form backend, or analytics tool means updating it in the same commit and bumping its effective date.
+- Terms of Service: paid services and platform access run under separate written agreements; the real examples on the Site are illustrations, not promises of results; "In build" modules carry no release guarantee.
 
 ---
 
@@ -155,4 +160,4 @@ Any element with `data-interest="…"` pre-selects that option in the contact fo
 
 ---
 
-*CLAUDE.md — Solenhive Website v3.3 · Last updated: October 2026*
+*CLAUDE.md — Solenhive Website v3.4 · Last updated: October 2026*
