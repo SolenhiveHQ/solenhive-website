@@ -5,10 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Terms of Service — Solenhive</title>
   <meta name="description" content="Solenhive Terms of Service — the rules that govern use of our website and services." />
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+  <link rel="icon" href="/favicon-192.png" sizes="192x192" type="image/png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500&family=Questrial&family=Work+Sans:wght@300;400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500&family=Work+Sans:wght@300;400&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -210,14 +212,9 @@
     }
     h1 { font-weight: 400; }
     h2 { font-size: 24px; font-weight: 500; }
-    .logo {
-      display: flex; align-items: center; gap: 2px;
-      color: var(--white); text-decoration: none;
-      font-family: 'Questrial', 'Gill Sans', sans-serif;
-      font-size: 26px; letter-spacing: 0.5px; line-height: 1;
-    }
+    .logo { display: flex; align-items: center; text-decoration: none; }
     .logo:hover { opacity: 1; }
-    .logo svg { width: 32px; height: 32px; margin: 0 -1px; }
+    .logo img { display: block; height: 36px; width: auto; }
 
     @media (max-width: 900px) {
       .nav-inner { padding: 0 28px; }
@@ -232,22 +229,7 @@
 
   <nav>
     <div class="nav-inner">
-      <a class="logo" href="/" aria-label="Solenhive home">
-        <span>solen</span>
-        <svg viewBox="0 0 100 100" aria-hidden="true">
-          <circle cx="50" cy="50" r="47" fill="#1e3a5f"/>
-          <g fill="none" stroke="#e8c44a" stroke-width="3" stroke-linejoin="round">
-            <polygon points="81.2,60.8 75.0,71.7 62.5,71.7 56.2,60.8 62.5,50.0 75.0,50.0"/>
-            <polygon points="62.5,71.7 56.2,82.5 43.8,82.5 37.5,71.7 43.7,60.8 56.2,60.8"/>
-            <polygon points="43.8,60.8 37.5,71.7 25.0,71.7 18.8,60.8 25.0,50.0 37.5,50.0"/>
-            <polygon points="43.8,39.2 37.5,50.0 25.0,50.0 18.8,39.2 25.0,28.3 37.5,28.3"/>
-            <polygon points="62.5,28.3 56.2,39.2 43.7,39.2 37.5,28.3 43.7,17.5 56.2,17.5"/>
-            <polygon points="81.2,39.2 75.0,50.0 62.5,50.0 56.2,39.2 62.5,28.3 75.0,28.3"/>
-          </g>
-          <polygon points="62.5,50.0 56.2,60.8 43.8,60.8 37.5,50.0 43.7,39.2 56.2,39.2" fill="#e8c44a"/>
-        </svg>
-        <span>hive</span>
-      </a>
+      <a class="logo" href="/" aria-label="Solenhive home"><img src="images/solenhive-logo-dark.png" width="196" height="36" alt="Solenhive" /></a>
       <a class="nav-back" href="/">← Back to site</a>
     </div>
   </nav>

@@ -6,7 +6,7 @@ Single-page marketing site for Solenhive: paid media strategy plus the marketing
 ## Tech stack
 - Pure HTML, CSS, JavaScript — no frameworks, no build tools
 - Pages: `index.html`, `privacy-policy.html`, `terms-of-service.html`
-- Assets: `favicon.svg`, `images/marc-carlton.{webp,jpg}` (founder photo, 720×900, 4:5)
+- Assets: `images/solenhive-logo-dark.png` (header logo), `favicon-32.png`, `favicon-192.png`, `apple-touch-icon.png`, `images/marc-carlton.{webp,jpg}` (founder photo, 720×900, 4:5)
 - Fonts: Google Fonts (see Typography)
 - Deployed via Vercel (auto-deploys on push to `master`)
 
@@ -16,11 +16,14 @@ solenhive-website/
 ├── index.html
 ├── privacy-policy.html
 ├── terms-of-service.html
-├── favicon.svg
+├── favicon-32.png
+├── favicon-192.png
+├── apple-touch-icon.png
 ├── images/
+│   ├── solenhive-logo-dark.png
 │   ├── marc-carlton.webp
 │   └── marc-carlton.jpg
-├── solenhive-logo.svg      ← original master file, not used on the site; never modify
+├── solenhive-logo.svg      ← old file with live Gill Sans text; not used on the site; never modify
 ├── solenhive-brand-guide.md
 └── CLAUDE.md               ← this file
 ```
@@ -59,12 +62,14 @@ solenhive-website/
 - Display / headings / labels / buttons / nav: **Barlow Condensed** (300 hero, 400 h2, 500 h3 and labels)
 - Body: **Work Sans** 300
 - Data, status tags, email, scan output: **DM Mono**
-- Logo wordmark: **Questrial**
+- Logo wordmark: never typeset. The logo is always the master artwork (see Logo).
 - Never use weight 600 or 700. All-caps only for labels, nav, buttons, with letter-spacing ≥ 3px.
 
 ### Logo
-- The site uses an inline SVG wordmark: "solen" + honeycomb mark + "hive". On navy: white text, gold hexagons, mark circle `#1e3a5f`. Same markup on all three pages — keep them identical.
-- Never recolor the logo with CSS filters.
+- The header logo is `images/solenhive-logo-dark.png`: Marc's 3000px master PNG with colors swapped for dark backgrounds (navy letters → white, mark circle → `#1e3a5f`, gold unchanged). Letterforms and mark geometry are the master's, untouched. Shown at 36px tall; same `<img>` on all three pages.
+- Header uses the wordmark + mark lockup without the tagline (the tagline is unreadable at header size); the brand standard allows this for app headers.
+- Favicons are cropped from the same master mark.
+- Never retype the wordmark in a font, redraw the mark, or recolor the logo with CSS filters. To regenerate, recolor the master PNG.
 
 ---
 
