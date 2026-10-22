@@ -587,7 +587,7 @@
             <div>
               <p class="k">Compliance</p>
               <p class="v">65<small>/100</small></p>
-              <p class="s">Overall tag compliance score</p>
+              <p class="s">Required tags present, weighted by page type</p>
             </div>
             <div>
               <p class="k">Tag platforms</p>
@@ -611,8 +611,8 @@
             <div class="platform">
               <div class="platform-top"><span>Meta Pixel</span><span class="sev err">Error</span></div>
               <p class="v">6</p>
-              <p class="s">4 firing</p>
-              <p class="issue">Lead event never fires</p>
+              <p class="s">2 sending events</p>
+              <p class="issue">No ViewContent or Lead events</p>
             </div>
             <div class="platform">
               <div class="platform-top"><span>Google Ads</span><span class="sev err">Error</span></div>
@@ -645,7 +645,7 @@
 
           <div class="sub-head"><p class="k">Findings</p></div>
           <ul class="findings" style="margin-top: 6px">
-            <li><span class="sev err">Error</span><p>Meta Pixel loads but the Lead event never fires. <span>Likely blocked by consent settings, so Meta spend optimizes without lead data.</span></p></li>
+            <li><span class="sev err">Error</span><p>4 of 6 Meta Pixels send no events; the other 2 send only PageView. <span>No ViewContent or Lead events reach Meta, so campaigns optimize without lead data.</span></p></li>
             <li><span class="sev err">Error</span><p>6 Google Ads conversion tags installed but never fire. <span>Conversions never reach Google, so automated bidding runs blind.</span></p></li>
             <li><span class="sev warn">Warn</span><p>12 GA4 properties firing at once. <span>Overlapping scripts from the site platform, vendors, and brand-level tags split the data.</span></p></li>
             <li><span class="sev warn">Warn</span><p>7 tag containers load more than once per page. <span>Wasted requests and possible double-counting.</span></p></li>
