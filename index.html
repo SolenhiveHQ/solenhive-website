@@ -142,47 +142,91 @@
     .menu-btn[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
     .menu-btn[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
 
-    /* ── Split-screen hero: media | the mark | tools, like the logo ── */
-    .split { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--line); }
-    .half {
-      --pad-x: clamp(28px, 4vw, 72px);
+    /* ── Sliding split hero: media | the mark (drag handle) | tools ── */
+    .split {
+      --split: 50;
+      --ease: cubic-bezier(.65, 0, .35, 1);
       position: relative;
       display: flex;
-      flex-direction: column;
-      justify-content: center;
-      min-height: clamp(520px, calc(100vh - 72px), 860px);
-      padding: clamp(64px, 7vw, 112px) var(--pad-x);
+      height: clamp(520px, 66vh, 640px);
+      border-bottom: 1px solid var(--line);
+      overflow: hidden;
     }
-    .half-media { padding-left: var(--edge); padding-right: calc(var(--pad-x) + 12px); }
-    .half-tools { padding-right: var(--edge); padding-left: calc(var(--pad-x) + 12px); background: var(--navy-mid); }
-    .half-tools::before {
-      content: '';
-      position: absolute;
-      top: 0; bottom: 0; left: -5px;
-      width: 10px;
-      background: var(--hive-v) repeat-y;
-      pointer-events: none;
-    }
-    .half .for { font-size: var(--t-sm); color: var(--gold); margin-bottom: 18px; }
-    .half .big {
+    .split.dragging { cursor: grabbing; user-select: none; }
+    .half {
+      --pad-x: clamp(28px, 3.6vw, 64px);
       position: relative;
+      min-width: 0;
+      display: grid;
+      grid-template-rows: 1fr auto 1fr;
+      padding: clamp(40px, 5vw, 64px) var(--pad-x);
+    }
+    .half-media { flex: 0 0 calc(var(--split) * 1%); padding-left: var(--edge); padding-right: calc(var(--pad-x) + 40px); transition: flex-basis .6s var(--ease); }
+    .half-tools { flex: 1 1 0; padding-right: var(--edge); padding-left: calc(var(--pad-x) + 40px); background: var(--navy-mid); }
+    .split.dragging .half-media, .split.dragging .seam, .split.dragging .handle { transition: none; }
+    .half .top { align-self: end; }
+    .half .for { font-size: var(--t-sm); color: var(--gold); margin-bottom: 16px; }
+    .half .big {
       font-family: var(--display);
       font-weight: 300;
-      font-size: clamp(48px, 5.8vw, 112px);
+      font-size: clamp(48px, 5.4vw, 104px);
       line-height: .95;
       letter-spacing: -0.02em;
-      margin-bottom: clamp(20px, 2.4vw, 32px);
+      transition: font-size .6s var(--ease);
     }
-    .half .lede { color: var(--muted); max-width: 40ch; margin-bottom: 32px; }
-    .seam-mark {
+    .half .bottom { align-self: start; padding-top: clamp(20px, 2.2vw, 28px); }
+    .half .detail { display: none; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+    .half .lede { color: var(--muted); max-width: 40ch; margin-bottom: 28px; }
+    .half .narrow-cta { display: none; }
+
+    /* wide side: detail replaces the intro */
+    .split.is-media .half-media .intro, .split.is-tools .half-tools .intro { display: none; }
+    .split.is-media .half-media .detail, .split.is-tools .half-tools .detail { display: block; animation: fadeUp .4s .18s both; }
+    /* narrow side: headline and one button */
+    .split.is-media .half-tools .big, .split.is-tools .half-media .big { font-size: clamp(34px, 3vw, 48px); }
+    .split.is-media .half-tools .bottom > :not(.narrow-cta), .split.is-tools .half-media .bottom > :not(.narrow-cta) { display: none; }
+    .split.is-media .half-tools .narrow-cta, .split.is-tools .half-media .narrow-cta { display: inline-flex; white-space: nowrap; padding: 0 18px; animation: fadeUp .4s .18s both; }
+
+    .detail-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 40px; list-style: none; margin-bottom: 28px; max-width: 760px; }
+    .detail-list b { display: block; font-family: var(--display); font-weight: 400; font-size: 22px; line-height: 1.15; margin-bottom: 4px; }
+    .detail-list span { display: block; font-size: 15px; color: var(--muted); line-height: 1.5; }
+    .detail-list .status { margin-left: 10px; font-size: 13px; vertical-align: 2px; }
+    .detail-list b .status { display: inline-flex; font-family: var(--body); }
+
+    /* the seam and its handle (the mark) */
+    .seam {
       position: absolute;
-      z-index: 2;
-      width: 76px;
-      height: 76px;
-      left: calc(-1 * (var(--pad-x) + 12px) - 38px);
-      top: calc(.475em - 38px);
+      top: 0; bottom: 0;
+      left: calc(var(--split) * 1%);
+      width: 10px;
+      margin-left: -5px;
+      background: var(--hive-v) repeat-y;
+      pointer-events: none;
+      transition: left .6s var(--ease);
     }
+    .handle {
+      position: absolute;
+      z-index: 3;
+      top: 50%;
+      left: calc(var(--split) * 1%);
+      transform: translate(-50%, -50%);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px;
+      background: none;
+      border: 0;
+      cursor: grab;
+      touch-action: none;
+      transition: left .6s var(--ease);
+    }
+    .handle img { width: 76px; height: 76px; transition: transform .2s; -webkit-user-drag: none; user-select: none; pointer-events: none; }
+    .handle:hover img, .handle:focus-visible img { transform: scale(1.06); }
+    .handle .chev { width: 10px; height: 16px; opacity: .7; }
     .seam-mark-m { display: none; }
+    .split.dragging .handle { cursor: grabbing; }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
     /* ── The thread: the hive line runs down the page, a cell per section ── */
     .threaded { position: relative; }
@@ -245,6 +289,19 @@
     .flow .node b { font-family: var(--display); font-weight: 400; font-size: 21px; line-height: 1.15; }
     .flow .node span { font-size: 14px; color: var(--muted); line-height: 1.45; }
     .flow .link { flex: 0 0 34px; align-self: center; height: 10px; background: var(--hive-h) repeat-x center; }
+
+    .cycles { grid-column: 6 / span 7; display: flex; flex-wrap: wrap; align-items: stretch; }
+    .cycle { flex: 1 1 220px; min-width: 0; padding: 20px 22px; background: var(--navy-mid); border: 1px solid var(--line); }
+    .cyc-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-family: var(--display); font-size: 22px; font-weight: 400; margin-bottom: 4px; max-width: none; }
+    .cyc-state { font-family: var(--body); font-size: 13px; color: var(--muted); text-align: right; }
+    .cyc-cap { font-size: 14px; color: var(--muted); }
+    .meter { height: 6px; background: var(--line); margin: 16px 0 10px; }
+    .meter i { display: block; height: 100%; background: var(--gold); }
+    .cyc-nums { display: flex; justify-content: space-between; gap: 12px; font-size: 14px; max-width: none; }
+    .cyc-nums .left { color: var(--gold); }
+    .carry { flex: 0 0 116px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 8px; padding: 0 8px; font-size: 13px; color: var(--gold); text-align: center; }
+    .carry::before { content: ''; width: 100%; height: 10px; background: var(--hive-h) repeat-x; }
+    .cycles figcaption { flex-basis: 100%; margin-top: 14px; font-size: 14px; color: var(--muted); }
 
     /* ── Tag waterfall ── */
     .scan { background: var(--navy-mid); border: 1px solid var(--line); }
@@ -314,6 +371,8 @@
     @keyframes pop   { from { opacity: 0; } to { opacity: 1; } }
     @keyframes sweep { 0% { left: 0; opacity: 1; } 88% { opacity: 1; } 100% { left: 100%; opacity: 0; } }
     @media (prefers-reduced-motion: reduce) {
+      .half-media, .seam, .handle, .half .big { transition: none !important; }
+      .half .detail, .half .narrow-cta { animation: none !important; }
       .scan .bar, .scan .evt { animation: none !important; transform: none; opacity: 1; }
       .scan .playhead-layer { display: none !important; }
     }
@@ -399,7 +458,7 @@
     @media (max-width: 1080px) {
       .threaded::before, section.block::before { display: none; }
       .section-head h2, .section-head p { grid-column: 1 / -1; }
-      .panel-copy, .flow { grid-column: 1 / -1; }
+      .panel-copy, .flow, .cycles { grid-column: 1 / -1; }
       .findings { grid-column: 1 / -1; }
       .coverage { grid-column: 1 / span 8; position: static; margin-top: 24px; }
       .whitelabel h3 { grid-column: 1 / -1; }
@@ -414,12 +473,21 @@
 
     /* ── Mobile nav + stacked split ── */
     @media (max-width: 900px) {
-      .split { grid-template-columns: 1fr; }
-      .half { min-height: 0; padding: clamp(56px, 11vw, 80px) var(--gutter); }
-      .half-media, .half-tools { padding-left: var(--gutter); padding-right: var(--gutter); }
-      .half-tools::before { top: -5px; bottom: auto; left: 0; right: 0; width: auto; height: 10px; background: var(--hive-h) repeat-x; }
-      .seam-mark { display: none; }
+      .split { display: block; height: auto; overflow: visible; }
+      .half { display: block; padding: clamp(56px, 11vw, 80px) var(--gutter); }
+      .half-media { padding-right: var(--gutter); }
+      .half-tools { padding-left: var(--gutter); }
+      .half-tools::before { content: ''; position: absolute; top: -5px; left: 0; right: 0; height: 10px; background: var(--hive-h) repeat-x; }
+      .seam, .handle { display: none; }
       .seam-mark-m { display: block; position: absolute; z-index: 2; width: 64px; height: 64px; top: -32px; left: var(--gutter); }
+      .half .bottom { display: block; }
+      .split .half .detail { display: none; margin-top: 8px; animation: none; }
+      .split .half .intro { display: block; }
+      .split .half .narrow-cta { display: none; }
+      .split .half .big { font-size: clamp(44px, 11vw, 64px); }
+      .split .half.open .detail { display: block; animation: fadeUp .35s both; }
+      .split .half .detail .btn-gold { display: none; }
+      .detail-list { grid-template-columns: 1fr; gap: 18px; }
 
       .menu-btn { display: flex; }
       .nav { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; padding: 8px var(--gutter) 24px; background: var(--navy); border-bottom: 1px solid var(--line); }
@@ -434,6 +502,9 @@
       .tab { padding: 14px 0 12px; border-bottom: 1px solid var(--line); margin-bottom: 0; }
       .tab[aria-selected="true"] { border-bottom: 2px solid var(--gold); }
       .flow { flex-direction: column; }
+      .cycles { flex-direction: column; }
+      .carry { flex: 0 0 auto; flex-direction: row; justify-content: flex-start; padding: 12px 0 12px 22px; }
+      .carry::before { width: 10px; height: 34px; background: var(--hive-v) repeat-y; }
       .flow .link { flex: 0 0 28px; width: 10px; height: 28px; align-self: flex-start; margin-left: 22px; background: var(--hive-v) repeat-y; }
       .scan-head { padding: 16px 18px; }
       .rows { padding-top: 12px; }
@@ -476,14 +547,14 @@
 
   <header class="site-header">
     <div class="wrap">
-      <a class="logo" href="#top" aria-label="Solenhive home"><img src="images/solenhive-logo-dark.svg" width="182" height="34" alt="Solenhive" /></a>
+      <a class="logo" href="#top" aria-label="Solenhive home"><img src="images/solenhive-logo-dark.svg" width="185" height="34" alt="Solenhive" /></a>
       <button class="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
         <span></span><span></span><span></span>
       </button>
       <nav class="nav" id="site-nav" aria-label="Primary">
         <a href="#platform">Platform</a>
         <a href="#findings">Findings</a>
-        <a href="#media">Media</a>
+        <a href="#top" data-slide="media">Media</a>
         <a href="#about">About</a>
         <a class="btn btn-gold" href="#contact" data-interest="A digital audit">Book an audit</a>
       </nav>
@@ -492,27 +563,69 @@
 
   <main id="top">
 
-    <!-- Split-screen hero: the logo's shape. Media | the mark | tools -->
-    <section class="split" aria-label="What Solenhive does">
-      <div class="half half-media">
-        <p class="for">For multi-location brands</p>
+    <!-- Sliding split hero: the logo's shape. Media | the mark | tools -->
+    <section class="split is-both" id="split" aria-label="What Solenhive does">
+      <div class="half half-media" id="half-media">
+        <div class="top"><p class="for">For multi-location brands</p></div>
         <h1 class="big">We run the media.</h1>
-        <p class="lede">Paid media strategy across Google, Meta, and TikTok. Start with a fixed-scope audit, then keep us on as your media lead.</p>
-        <div class="ctas">
-          <a class="btn btn-gold" href="#contact" data-interest="A digital audit">Book a digital audit</a>
-          <a class="btn btn-line" href="#media">How we run media</a>
+        <div class="bottom">
+          <div class="intro">
+            <p class="lede">Paid media strategy across Google, Meta, and TikTok. Start with a fixed-scope audit, then keep us on as your media lead.</p>
+            <div class="ctas">
+              <a class="btn btn-gold" href="#contact" data-interest="A digital audit">Book a digital audit</a>
+              <a class="btn btn-line" href="#audit" data-slide="media" aria-controls="detail-media" aria-expanded="false">How we run media</a>
+            </div>
+          </div>
+          <div class="detail" id="detail-media">
+            <ul class="detail-list">
+              <li><b>Account structure</b><span>Every location's spend and results readable on its own, across Google, Meta, and TikTok.</span></li>
+              <li><b>Budget by location</b><span>Set and rebalanced against what each market returns, not split evenly by habit.</span></li>
+              <li><b>Creative testing</b><span>Structured tests on every platform, so the data picks the ads that keep running.</span></li>
+              <li><b>Measurement first</b><span>A tag check before a dollar is spent, so platforms optimize on real conversions.</span></li>
+            </ul>
+            <div class="ctas">
+              <a class="btn btn-gold" href="#contact" data-interest="A digital audit">Book a digital audit</a>
+              <a class="btn btn-line" href="#audit">How the audit works</a>
+            </div>
+          </div>
+          <button class="btn btn-line narrow-cta" type="button" data-slide="media">Show media</button>
         </div>
       </div>
-      <div class="half half-tools">
+
+      <div class="half half-tools" id="half-tools">
         <img class="seam-mark-m" src="images/solenhive-mark.svg" width="64" height="64" alt="" />
-        <p class="for">For agencies and resellers</p>
-        <h2 class="big"><img class="seam-mark" src="images/solenhive-mark.svg" width="76" height="76" alt="" />We build the tools.</h2>
-        <p class="lede">One platform for tag compliance, client reporting, and retainer billing. Run it with us, or under your own name, logo, and domain.</p>
-        <div class="ctas">
-          <a class="btn btn-gold" href="#contact" data-interest="The platform or white-label">Talk about white-label</a>
-          <a class="btn btn-line" href="#platform">See the platform</a>
+        <div class="top"><p class="for">For agencies and resellers</p></div>
+        <h2 class="big">We build the tools.</h2>
+        <div class="bottom">
+          <div class="intro">
+            <p class="lede">One platform for tag compliance, client reporting, and retainer billing. Run it with us, or under your own name, logo, and domain.</p>
+            <div class="ctas">
+              <a class="btn btn-gold" href="#contact" data-interest="The platform or white-label">Talk about white-label</a>
+              <a class="btn btn-line" href="#platform" data-slide="tools" aria-controls="detail-tools" aria-expanded="false">See the platform</a>
+            </div>
+          </div>
+          <div class="detail" id="detail-tools">
+            <ul class="detail-list">
+              <li><b>Tag &amp; pixel compliance <span class="status">Live</span></b><span>Finds missing, silent, and duplicate tags on every client site.</span></li>
+              <li><b>Client reporting <span class="status">Live</span></b><span>GA4 and Google Ads reports in your branding, without the monthly rebuild.</span></li>
+              <li><b>Retainers &amp; billing <span class="status">Live</span></b><span>Hours, carryover, statements, and payment links, built for agencies.</span></li>
+              <li><b>Paid media analytics <span class="status building">In build</span></b><span>Every platform and location in one view, with budget checks.</span></li>
+            </ul>
+            <div class="ctas">
+              <a class="btn btn-gold" href="#contact" data-interest="The platform or white-label">Talk about white-label</a>
+              <a class="btn btn-line" href="#platform">Explore the platform</a>
+            </div>
+          </div>
+          <button class="btn btn-line narrow-cta" type="button" data-slide="tools">Show tools</button>
         </div>
       </div>
+
+      <div class="seam" aria-hidden="true"></div>
+      <button class="handle" type="button" role="slider" aria-label="Slide between the media side and the tools side" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-valuetext="Both sides">
+        <svg class="chev" viewBox="0 0 10 16" aria-hidden="true"><path d="M8 1 L2 8 L8 15" fill="none" stroke="#8fa3bb" stroke-width="1.6"/></svg>
+        <img src="images/solenhive-mark.svg" width="76" height="76" alt="" draggable="false" />
+        <svg class="chev" viewBox="0 0 10 16" aria-hidden="true"><path d="M2 1 L8 8 L2 15" fill="none" stroke="#8fa3bb" stroke-width="1.6"/></svg>
+      </button>
     </section>
 
     <div class="threaded">
@@ -581,17 +694,24 @@
           <div class="panel grid panel-grid" role="tabpanel" id="panel-billing" aria-labelledby="tab-billing" tabindex="0" hidden>
             <div class="panel-copy">
               <h3>Retainers that bill themselves.</h3>
-              <p>Retainer tracking, hours carryover, statements, and payment links, built for how agencies bill.</p>
+              <p>Hours logged against each retainer, unused hours carried into the next cycle by your rules, then a statement and payment link when the cycle closes.</p>
             </div>
-            <ol class="flow" aria-label="How retainer billing works">
-              <li class="node"><b>Retainer per client</b><span>Hours and rate set once</span></li>
-              <li class="link" aria-hidden="true"></li>
-              <li class="node"><b>Hours logged</b><span>Tracked against the retainer</span></li>
-              <li class="link" aria-hidden="true"></li>
-              <li class="node"><b>Unused hours carry over</b><span>Into the next cycle, by your rules</span></li>
-              <li class="link" aria-hidden="true"></li>
-              <li class="node out"><b>Statement and payment link</b><span>Sent when you choose</span></li>
-            </ol>
+            <figure class="cycles" aria-label="Two consecutive retainer cycles from the live app">
+              <div class="cycle">
+                <p class="cyc-head"><span>Cycle 1</span><span class="cyc-state">Closed</span></p>
+                <p class="cyc-cap">20.00 hrs purchased, no carryover</p>
+                <div class="meter" role="img" aria-label="96 percent used"><i style="width:96%"></i></div>
+                <p class="cyc-nums"><span>19.25 hrs used</span><span class="left">0.75 hrs left</span></p>
+              </div>
+              <div class="carry"><span>0.75 hrs carry over</span></div>
+              <div class="cycle">
+                <p class="cyc-head"><span>Cycle 2</span><span class="cyc-state">Closed, renewal funded</span></p>
+                <p class="cyc-cap">20.00 purchased + 0.75 carried = 20.75 hrs</p>
+                <div class="meter" role="img" aria-label="100 percent used"><i style="width:100%"></i></div>
+                <p class="cyc-nums"><span>20.75 hrs used</span><span>0.00 hrs left</span></p>
+              </div>
+              <figcaption>Two real cycles from the live app, client details removed.</figcaption>
+            </figure>
           </div>
 
           <div class="panel grid panel-grid" role="tabpanel" id="panel-analytics" aria-labelledby="tab-analytics" tabindex="0" hidden>
@@ -646,24 +766,6 @@
                 </tbody>
               </table>
             </aside>
-          </div>
-        </div>
-      </section>
-
-      <!-- Media practice -->
-      <section class="block" id="media">
-        <div class="wrap">
-          <div class="grid section-head">
-            <h2>How we run the media.</h2>
-            <p>Senior paid media strategy for brands with many locations: one plan, budgets set by location, and measurement checked before a dollar is spent.</p>
-          </div>
-          <div class="grid">
-            <div class="practice">
-              <div><h3>Account structure</h3><p>Campaigns organized so every location's spend and results can be read on their own, across Google, Meta, and TikTok.</p></div>
-              <div><h3>Budget by location</h3><p>Spend set and rebalanced per location against what each market returns, not split evenly by habit.</p></div>
-              <div><h3>Creative testing</h3><p>Structured tests on every platform, so the ads that run longest are the ones the data picked.</p></div>
-              <div><h3>Measurement first</h3><p>Every account starts with a tag check, so the platforms optimize on real conversions, not silent pixels.</p></div>
-            </div>
           </div>
         </div>
       </section>
@@ -766,6 +868,61 @@
     nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
     document.addEventListener('keydown', e => { if (e.key === 'Escape' && nav.classList.contains('open')) { setMenu(false); menuBtn.focus(); } });
     window.addEventListener('resize', () => { if (window.innerWidth > 900) setMenu(false); });
+
+    // Sliding split hero: drag the mark, use the arrow keys, or press the buttons
+    const split = document.getElementById('split');
+    const handle = split.querySelector('.handle');
+    const wide = matchMedia('(min-width: 901px)');
+    const STOPS = { tools: 24, both: 50, media: 76 };
+    function stateFor(v) { return v >= 63 ? 'media' : v <= 37 ? 'tools' : 'both'; }
+    function setSplit(v, snap) {
+      const state = stateFor(v);
+      const val = snap ? STOPS[state] : v;
+      split.style.setProperty('--split', val);
+      split.classList.remove('is-media', 'is-tools', 'is-both');
+      split.classList.add('is-' + state);
+      handle.setAttribute('aria-valuenow', Math.round(val));
+      handle.setAttribute('aria-valuetext', state === 'both' ? 'Both sides' : state === 'media' ? 'Media side open' : 'Tools side open');
+      document.querySelectorAll('[data-slide][aria-expanded]').forEach(b => b.setAttribute('aria-expanded', b.dataset.slide === state ? 'true' : 'false'));
+    }
+    function slideTo(state) { setSplit(STOPS[state], true); }
+    let dragging = false;
+    handle.addEventListener('pointerdown', e => { if (!wide.matches) return; e.preventDefault(); dragging = true; split.classList.add('dragging'); handle.setPointerCapture(e.pointerId); });
+    handle.addEventListener('pointermove', e => {
+      if (!dragging) return;
+      const r = split.getBoundingClientRect();
+      setSplit(Math.min(82, Math.max(18, (e.clientX - r.left) / r.width * 100)), false);
+    });
+    function endDrag() { if (!dragging) return; dragging = false; split.classList.remove('dragging'); setSplit(parseFloat(split.style.getPropertyValue('--split')) || 50, true); }
+    handle.addEventListener('pointerup', endDrag);
+    handle.addEventListener('pointercancel', endDrag);
+    handle.addEventListener('keydown', e => {
+      const cur = stateFor(parseFloat(split.style.getPropertyValue('--split')) || 50);
+      const order = ['tools', 'both', 'media'];
+      let i = order.indexOf(cur);
+      if (e.key === 'ArrowRight' || e.key === 'ArrowUp') i = Math.min(2, i + 1);
+      else if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') i = Math.max(0, i - 1);
+      else if (e.key === 'Home') i = 0;
+      else if (e.key === 'End') i = 2;
+      else if (e.key === 'Enter' || e.key === ' ') i = 1;
+      else return;
+      e.preventDefault(); slideTo(order[i]);
+    });
+    document.querySelectorAll('[data-slide]').forEach(el => el.addEventListener('click', e => {
+      const side = el.dataset.slide;
+      if (wide.matches) {
+        e.preventDefault();
+        if (el.getAttribute('href') === '#top') window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });
+        slideTo(side);
+      } else if (el.hasAttribute('aria-controls')) {
+        e.preventDefault();
+        const half = document.getElementById('half-' + side);
+        const open = half.classList.toggle('open');
+        el.setAttribute('aria-expanded', open ? 'true' : 'false');
+        el.textContent = open ? 'Hide details' : (side === 'media' ? 'How we run media' : 'See the platform');
+      }
+    }));
+    setSplit(50, true);
 
     // Platform tabs (arrow keys, Home, End)
     const tabs = [...document.querySelectorAll('[role="tab"]')];

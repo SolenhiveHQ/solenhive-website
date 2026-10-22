@@ -40,6 +40,7 @@ solenhive-website/
 - **No employer references** anywhere in this repo (no current employer, no automaker brand names). The founder bio stays as written unless Marc changes it.
 - No client names, logos, screenshots, or results without the client's written sign-off.
 - Scan data must stay anonymized: no site URLs, pixel IDs, site-platform vendor names, or industry-specific terms ("dealer", "OEM", "SRP").
+- Billing tab shows two real retainer cycles from the invoicing app: hours only. Never show client names, rates, dollar amounts, invoice numbers, or time-entry descriptions (they name clients' customers).
 - Scan numbers must match across the hero waterfall, the punchline, the findings, and the coverage table. "Sending data" means the tag sent events, not just a network request.
 - Severity uses color plus a text label (Error / Warning), never color alone.
 - No invented stats, prices, timings, or testimonials. If a fact is missing, leave the element out — never ship a `[PLACEHOLDER]`.
@@ -93,23 +94,22 @@ The **tag waterfall** in the platform's first tab — a browser-style timeline o
 - Breakpoints: 1080px (two-column sections stack), 900px (hamburger menu), 720px (waterfall rows stack name over bar; forms go single column), 380px (smaller logo and step numbers)
 
 ### Logo
-- Header logo is `images/solenhive-logo-dark.svg`: a vector traced from Marc's 3000px master PNG. Letterforms and honeycomb geometry are the master's; colors swapped for dark backgrounds only (letters white, circle `#1e3a5f`, cells `#e8c44a`). Shown 34px tall, same `<img>` on all three pages.
-- Header uses wordmark + mark without the tagline (unreadable at header size; the brand standard allows this for app headers).
-- Favicons are cropped from the same master mark.
-- Never retype the wordmark in a font, redraw the mark, use a downscaled raster, or recolor with CSS filters. To regenerate, re-trace the master.
+- Source of truth: the invoicing app's official dark SVG (`https://invoicing.solenhive.com/solenhive-logo-dark.svg`): text as vector paths, seven gold cells clipped in a circle filled `#0D1B2E`, so the mark sits clean on navy. Never re-trace, retype, recolor, or use a raster of it.
+- `images/solenhive-logo-dark.svg` — header lockup: that file with the rule and tagline removed and the viewBox cropped (`22 19 512 94`), shown 34px tall on all three pages.
+- `images/solenhive-lockup-dark.svg` — the untouched full lockup with tagline, for large placements only (the tagline is unreadable under ~500px wide).
+- `images/solenhive-mark.svg` — the mark alone (circle, clip, cells) for the hero handle and phone seam. Favicons (`favicon-32.png`, `favicon-192.png`, `apple-touch-icon.png`) are rendered from it. The invoicing app's `app/favicon.ico` and `app/apple-icon.png` come from the same mark.
 
 ---
 
 ## Home page sections (in order)
-1. **Header** — sticky; logo left; Platform · Findings · Media · About; "Book an audit"; hamburger below 900px (Escape closes it)
-2. **Split hero** — left: "For multi-location brands / We run the media." (h1); right: "For agencies and resellers / We build the tools." with the mark on the seam; each side has its own two buttons
+1. **Header** — sticky; logo left; Platform · Findings · Media (slides the hero) · About; "Book an audit"; hamburger below 900px (Escape closes it)
+2. **Sliding split hero** — left: "For multi-location brands / We run the media." (h1); right: "For agencies and resellers / We build the tools." The mark is a drag handle (`role="slider"`, arrow keys, Home/End, Enter centers) on the hive-line seam. Snap points: 24 / 50 / 76. Dragging or "How we run media" / "See the platform" opens that side: its intro is replaced by detail (media practice areas, or the four modules), and the other side narrows to its headline plus a "Show media" / "Show tools" button. Height `clamp(520px, 66vh, 640px)`. Below 901px there is no slider: halves stack, the seam turns horizontal with the mark on it, and the same buttons expand each side's detail in place. The nav's "Media" link slides to the media side.
 3. **Platform** (`#platform`) — four accessible tabs (arrow keys, Home, End): Tag & pixel compliance (waterfall + punchline), Client reporting, Retainers & billing, Paid media analytics (In build); then the white-label statement
 4. **Findings** (`#findings`) — what broken tracking costs the media budget: four findings from the scan + coverage table (the bridge between the two sides)
-5. **Media** (`#media`) — four practice areas
-6. **Audit** (`#audit`) — four numbered steps, plus fractional media leadership and measurement setup
-7. **About** (`#about`) — founder photo and bio
-8. **Contact** (`#contact`) — form that composes an email to hello@solenhive.com (no backend yet), with inline validation messages
-9. **Footer** — legal line, Privacy, Terms, email
+5. **Audit** (`#audit`) — four numbered steps, plus fractional media leadership and measurement setup
+6. **About** (`#about`) — founder photo and bio
+7. **Contact** (`#contact`) — form that composes an email to hello@solenhive.com (no backend yet), with inline validation messages
+8. **Footer** — legal line, Privacy, Terms, email
 
 Any element with `data-interest="…"` pre-selects that option in the contact form when clicked.
 
@@ -154,4 +154,4 @@ Any element with `data-interest="…"` pre-selects that option in the contact fo
 
 ---
 
-*CLAUDE.md — Solenhive Website v3.1 · Last updated: October 2026*
+*CLAUDE.md — Solenhive Website v3.2 · Last updated: October 2026*
